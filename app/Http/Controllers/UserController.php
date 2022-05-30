@@ -60,7 +60,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-
         $user = User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
@@ -89,7 +88,7 @@ class UserController extends Controller
                 'user' => $request->user,
                 'email' => $request->email,
                 'telefono' => $request->telefono,
-                'idServicio' => $request->idServicio
+                'idServicio' => $request->especialidad,
             ]
         );
 

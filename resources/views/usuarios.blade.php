@@ -152,7 +152,6 @@
                                         @foreach ($servicios as $servicio)
                                             <option value="{{ $servicio->id }}">{{ $servicio->servicio }}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -185,7 +184,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Documento</label>
-                                    <input type="text" name="name" id="idDocumentEdit" class="form-control input-warning"
+                                    <input type="text" name="name" id="idDocumentEdit" disabled class="form-control"
                                         placeholder="">
                                 </div>
                             </div>
@@ -248,7 +247,15 @@
 
                         <div class="row clearfix">
                             <div class="col-sm-6">
-
+                                <div class="form-group">
+                                    <label for="">Especialidad</label>
+                                    <select class="form-control" name="especialidad" id="idServicioEdit" disabled>
+                                        <option value="">-- Seleccione --</option>
+                                        @foreach ($servicios as $servicio)
+                                            <option value="{{ $servicio->id }}">{{ $servicio->servicio }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -293,6 +300,14 @@
                 $("#user").val(response.data.user)
                 $("#idDocumentEdit").val(response.data.document)
                 $("#rol_id option[value=" + response.data.rol_id + "]").attr("selected", true)
+                $("#idServicioEdit option[value=" + response.data.idServicio + "]").attr("selected", true)
+                if(response.data.rol_id == 2)
+                {
+                    $("#idServicioEdit").attr('disabled', false)
+                }
+                else{
+                    $("#idServicioEdit").hide
+                }
             })
             $("#defaultModal2").modal('show')
         }

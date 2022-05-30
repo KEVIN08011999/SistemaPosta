@@ -24,11 +24,28 @@
              </li>
 
 
-             <li><a href="{{route('citas')}}" class="ai-icon" aria-expanded="false">
+             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                      <i class="flaticon-381-bookmark-1"></i>
+
                      <span class="nav-text">Citas</span>
                  </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('citas') }}">Citas</a></li>
+                     <li><a href="{{ route('triaje.index') }}">Triaje</a></li>
+                 </ul>
              </li>
+
+             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                     <i class="flaticon-381-id-card-bookmark-1"></i>
+
+                     <span class="nav-text">Pagos</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('citas') }}">Pagos Por Generar</a></li>
+                     <li><a href="{{ route('triaje.index') }}">Pagos Realizados</a></li>
+                 </ul>
+             </li>
+
 
 
              <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

@@ -36,7 +36,8 @@ class CitasController extends Controller
                 'fecha' => $request->fecha,
                 'idHorario' => $request->idHorario,
                 'observaciones' => $request->observaciones,
-                'idServicio' => $request->idServicio
+                'idServicio' => $request->idServicio,
+                'estado' => 1
             ]);
 
             return back()->with('success', 'Cita Creada correctamente');

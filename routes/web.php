@@ -31,20 +31,26 @@ Route::group(['prefix' => 'usuarios'], function() {
 
 
 Route::group(['prefix' => 'citas'], function () {
-    Route::get('citas', [CitasController::class, 'index'])->name('citas');
+    Route::get('/', [CitasController::class, 'index'])->name('citas');
     Route::post('store', [CitasController::class, 'store'])->name('cita.store');
     Route::post('update', [CitasController::class, 'update'])->name('cita.update');
 });
 
 
 Route::group(['prefix' => 'configuraciones'], function () {
-    Route::get('bloquesHorarios', [BloquesHorariosController::class, 'index'])->name('horarios.index');
+    Route::get('/', [BloquesHorariosController::class, 'index'])->name('horarios.index');
     Route::post('bloquesHorarios', [BloquesHorariosController::class, 'store'])->name('horario.store');
     Route::post('updateHorario', [BloquesHorariosController::class, 'update'])->name('horario.update');
 });
 
 Route::group(['prefix' => 'servicios'], function () {
-    Route::get('servicio', [ServiciosController::class, 'index'])->name('servicios.index');
+    Route::get('/', [ServiciosController::class, 'index'])->name('servicios.index');
     Route::post('servicio', [ServiciosController::class, 'store'])->name('servicio.store');
     Route::post('updateServicio', [ServiciosController::class, 'update'])->name('servicio.update');
+});
+
+
+Route::group(['prefix' => 'triajes'], function () {
+    Route::get('/', [TriajeController::class, 'index'])->name('triaje.index');
+    Route::post('store', [TriajeController::class, 'store'])->name('triaje.store');
 });

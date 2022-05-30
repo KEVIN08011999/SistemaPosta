@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('triajes', function (Blueprint $table) {
             $table->id();
-            $table->integer('idMedico');
-            $table->integer('idPaciente');
-            $table->integer('idHorario');
-            $table->integer('idServicio');
-            $table->string('observaciones');
-            $table->integer('estado');
-            $table->date('fecha');
+            $table->integer('idCita');
+            $table->integer('presion');
+            $table->integer('temperatura');
+            $table->integer('cardiaca');
+            $table->integer('saturacion');
+            $table->float('peso');
+            $table->integer('talla');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('triajes');
     }
 };

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{User};
+use App\Models\{Servicios, User};
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -30,32 +30,37 @@ class UserController extends Controller
     {
         $usuarios = User::whereRolId(1)->get();
         $tipo = "Administradores";
-        return view('usuarios', compact('usuarios', 'tipo'));
+        $servicios = Servicios::all();
+        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
     }
 
     public function medicos()
     {
-        $usuarios = User::whereRolId(2)->get();
+        $usuarios = User::whereRolId(2)->with('servicio')->get();
         $tipo = "Medicos";
-        return view('usuarios', compact('usuarios', 'tipo'));
+        $servicios = Servicios::all();
+        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
     }
 
     public function farmaceutas()
     {
         $usuarios = User::whereRolId(3)->get();
         $tipo = "Farmaceutas";
-        return view('usuarios', compact('usuarios', 'tipo'));
+        $servicios = Servicios::all();
+        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
     }
 
     public function pacientes()
     {
         $usuarios = User::whereRolId(4)->get();
         $tipo = "Pacientes";
-        return view('usuarios', compact('usuarios', 'tipo'));
+        $servicios = Servicios::all();
+        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
     }
 
     public function store(Request $request)
     {
+
         $user = User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
@@ -64,7 +69,9 @@ class UserController extends Controller
             'password' => 'a1Bz20ydqelm8m1wql' . md5($request->password),
             'email' => $request->email,
             'photo' => $this->upload_global($request->file('photo'), 'perfiles'),
-            'telefono' => $request->telefono
+            'telefono' => $request->telefono,
+            'idServicio' => $request->idServicio,
+            'document' => $request->document
         ]);
 
         return back()->with('success', 'Usuario Creado correctamente');
@@ -81,7 +88,8 @@ class UserController extends Controller
                 'last_name' => $request->last_name,
                 'user' => $request->user,
                 'email' => $request->email,
-                'telefono' => $request->telefono
+                'telefono' => $request->telefono,
+                'idServicio' => $request->idServicio
             ]
         );
 
@@ -96,6 +104,13 @@ class UserController extends Controller
     public function get(User $usuario)
     {
         return $usuario;
+    }
+
+    public function validardocumento($document)
+    {
+        $val = User::whereDocument($document)->count();
+
+        return $val;
     }
 
 

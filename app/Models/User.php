@@ -26,6 +26,7 @@ class User extends Authenticatable
         'email',
         'photo',
         'telefono',
+        'document'
     ];
 
     /**
@@ -46,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function servicio()
+    {
+        return $this->hasOne(Servicios::class, 'id', 'idServicio');
+    }
 }

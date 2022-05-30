@@ -24,8 +24,11 @@
                     <table id="example" class="display min-w850">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Documento</th>
                                 <th>Nombre Completo</th>
+                                @if ($tipo == 'Medicos')
+                                    <th>Especialidad</th>
+                                @endif
                                 <th>Correo</th>
                                 <th>Usuario</th>
                                 <th></th>
@@ -34,8 +37,11 @@
                         <tbody>
                             @foreach ($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->document }}</td>
                                     <td>{{ $usuario->name }} {{ $usuario->last_name }}</td>
+                                    @if ($tipo == 'Medicos')
+                                        <td>{{$usuario->servicio->servicio}}</td>
+                                    @endif
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->user }}</td>
                                     <td>
@@ -63,6 +69,23 @@
                     <form action="{{ route('usuario.store') }}" method="post" autocomplete="off" accept-charset="UTF-8"
                         enctype="multipart/form-data">
                         @csrf
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Documento</label>
+                                    <input type="text" name="document" onblur="validarDocumento()" id="document"
+                                        class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Foto</label>
+                                    <input type="file" name="photo" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row clearfix">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -112,7 +135,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Tipo Usuario</label>
-                                    <select class="form-control show-tick" name="rol_id">
+                                    <select class="form-control show-tick" onchange="mostrar()" name="rol_id" id="rolid">
                                         <option value="">-- Seleccione --</option>
                                         <option value="1">Administrador</option>
                                         <option value="2">Medico</option>
@@ -123,8 +146,14 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="">Foto</label>
-                                    <input type="file" name="photo" class="form-control" id="">
+                                    <label for="">Especialidad</label>
+                                    <select class="form-control show-tick" name="idServicio" id="idServicio" disabled>
+                                        <option value="">-- Seleccione --</option>
+                                        @foreach ($servicios as $servicio)
+                                            <option value="{{ $servicio->id }}">{{ $servicio->servicio }}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +161,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">CERRAR</button>
-                    <button type="submit" class="btn btn-success btn-round waves-effect">GUARDAR</button>
+                    <button type="submit" disabled id="botonGuardar"
+                        class="btn btn-success btn-round waves-effect">GUARDAR</button>
                     </form>
                 </div>
             </div>
@@ -150,6 +180,24 @@
                     <form action="{{ route('usuario.update') }}" method="post" autocomplete="off" accept-charset="UTF-8"
                         enctype="multipart/form-data">
                         @csrf
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Documento</label>
+                                    <input type="text" name="name" id="idDocumentEdit" class="form-control input-warning"
+                                        placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Foto</label>
+                                    <input type="file" name="photo" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="row clearfix">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -200,10 +248,7 @@
 
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">Foto</label>
-                                    <input type="file" name="photo" class="form-control" id="">
-                                </div>
+
                             </div>
                         </div>
 
@@ -222,32 +267,59 @@
     <script>
         $('#example').DataTable({
             responsive: true,
-                language: {
-                    searchPlaceholder: 'Buscar',
-                    sSearch: '',
-                    lengthMenu: '_MENU_ Registro por Pagina',
-                    paginate: {
-                        first: "Primera",
-                        previous: "Anterior",
-                        next: "Siguiente",
-                        last: "Ultima"
-                    },
-                    info: "Mostrando del _START_ a _END_ en _TOTAL_ registros",
-                }
+            language: {
+                searchPlaceholder: 'Buscar',
+                sSearch: '',
+                lengthMenu: '_MENU_ Registro por Pagina',
+                paginate: {
+                    first: "Primera",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Ultima"
+                },
+                info: "Mostrando del _START_ a _END_ en _TOTAL_ registros",
+            }
         });
 
         function editarUsuario(idUsuario) {
 
             axios.get('/api/usuario/' + idUsuario).then((response) => {
+                console.log(response.data)
                 $("#name").val(response.data.name)
                 $("#idUsuario").val(response.data.id)
                 $("#last_name").val(response.data.last_name)
                 $("#email").val(response.data.email)
                 $("#telefono").val(response.data.telefono)
                 $("#user").val(response.data.user)
+                $("#idDocumentEdit").val(response.data.document)
                 $("#rol_id option[value=" + response.data.rol_id + "]").attr("selected", true)
             })
             $("#defaultModal2").modal('show')
+        }
+
+        function mostrar() {
+
+            if ($("#rolid").val() == 2) {
+                $("#idServicio").attr('disabled', false)
+            } else {
+                $("#idServicio").attr('disabled', true)
+            }
+        }
+
+        function validarDocumento() {
+            documento = $("#document").val()
+            console.log(documento)
+            axios.get('/api/validarDocumento/' + documento).then((response) => {
+                if (response.data == 0) {
+                    $("#botonGuardar").attr('disabled', false)
+                    $("#document").addClass("is-valid")
+                    $("#document").removeClass("is-invalid")
+                } else {
+                    $("#document").addClass("is-invalid")
+                    $("#botonGuardar").attr('disabled', true)
+                }
+            })
+
         }
     </script>
 @endsection

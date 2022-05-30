@@ -18,6 +18,7 @@
     <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
@@ -182,6 +183,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="{{asset('assets/vendor/select2/js/select2.full.min.js')}}"></script>
+
+    <!-- Jquery Validation -->
+    <script src="{{asset('assets/vendor/jquery-validation/jquery.validate.min.js')}}"></script>
 
     @yield('scripts')
 </body>

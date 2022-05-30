@@ -18,16 +18,16 @@ return new class extends Migration
             $table->integer('idCita');
             $table->integer('idTriaje');
             $table->integer('idPaciente');
-            $table->text('motivo');
-            $table->text('antecedentes');
-            $table->integer('tiempo_enfermedad');
-            $table->string('alergias');
-            $table->string('intervenciones');
-            $table->integer('vacunas');
-            $table->text('examen');
-            $table->text('diagostico');
-            $table->text('tratamiento');
-            $table->integer('tipo_diagnostico');
+            $table->text('motivo')->nullable();
+            $table->text('antecedentes')->nullable();
+            $table->integer('tiempo_enfermedad')->nullable();
+            $table->string('alergias')->nullable();
+            $table->string('intervenciones')->nullable();
+            $table->integer('vacunas')->nullable();
+            $table->text('examen')->nullable();
+            $table->text('diagostico')->nullable();
+            $table->text('tratamiento')->nullable();
+            $table->integer('tipo_diagnostico')->nullable();
             $table->timestamps();
         });
     }

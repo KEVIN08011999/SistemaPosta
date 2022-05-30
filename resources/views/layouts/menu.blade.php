@@ -49,6 +49,17 @@
              <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                      <i class="flaticon-381-bookmark-1"></i>
 
+                     <span class="nav-text">Pacientes</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('pago.index') }}">Servicios Adicionales</a></li>
+                     <li><a href="{{ route('pago.realizados') }}">Diagnostico</a></li>
+                 </ul>
+             </li>
+
+             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                     <i class="flaticon-381-bookmark-1"></i>
+
                      <span class="nav-text">Farmacia</span>
                  </a>
                  <ul aria-expanded="false">

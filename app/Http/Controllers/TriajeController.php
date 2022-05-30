@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Citas, Triaje};
+use App\Models\{Citas, Diagnostico, Triaje};
 use Illuminate\Http\Request;
 
 class TriajeController extends Controller
@@ -16,7 +16,7 @@ class TriajeController extends Controller
     public function store(Request $request)
     {
 
-        Triaje::create([
+       $triaje = Triaje::create([
             'idCita' => $request->idCita,
             'presion' => $request->presion,
             'temperatura' => $request->temperatura,
@@ -24,6 +24,12 @@ class TriajeController extends Controller
             'saturacion' => $request->saturacion,
             'peso' => $request->peso,
             'talla' => $request->talla
+        ]);
+
+        Diagnostico::create([
+            'idCita' => $request->idCita,
+            'idTriaje' => $triaje->id,
+            'idPaciente' => 0
         ]);
 
         $cita = Citas::find($request->idCita);

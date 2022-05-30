@@ -54,3 +54,10 @@ Route::group(['prefix' => 'triajes'], function () {
     Route::get('/', [TriajeController::class, 'index'])->name('triaje.index');
     Route::post('store', [TriajeController::class, 'store'])->name('triaje.store');
 });
+
+Route::group(['prefix' => 'pagos'], function () {
+    Route::get('/', [PagosPacienteController::class, 'index'])->name('pago.index');
+    Route::get('realizados', [PagosPacienteController::class, 'realizados'])->name('pago.realizados');
+    Route::post('store', [PagosPacienteController::class, 'store'])->name('pago.store');
+    Route::get('view/{idPago}', [PagosPacienteController::class, 'view'])->name('pago.view');
+});

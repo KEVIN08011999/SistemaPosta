@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{BloquesHorarios, Citas, Servicios, User};
+use App\Models\{BloquesHorarios, Citas, PagosPaciente, Servicios, User};
 
 class CitasController extends Controller
 {
@@ -37,6 +37,16 @@ class CitasController extends Controller
                 'idHorario' => $request->idHorario,
                 'observaciones' => $request->observaciones,
                 'idServicio' => $request->idServicio,
+                'estado' => 1
+            ]);
+
+            $pago = PagosPaciente::create([
+                'idPaciente' => $request->idPaciente,
+                'idServicio' => $request->idServicio,
+                'precio' => 0,
+                'observacion' => $request->observaciones,
+                'metodoPago' => 0,
+                'fecha_generacion' => $request->fecha,
                 'estado' => 1
             ]);
 

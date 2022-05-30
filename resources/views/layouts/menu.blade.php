@@ -36,13 +36,25 @@
              </li>
 
              <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                     <i class="flaticon-381-id-card-bookmark-1"></i>
+                     <i class="flaticon-381-bookmark-1"></i>
 
                      <span class="nav-text">Pagos</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('citas') }}">Pagos Por Generar</a></li>
-                     <li><a href="{{ route('triaje.index') }}">Pagos Realizados</a></li>
+                     <li><a href="{{ route('pago.index') }}">Pagos Por Generar</a></li>
+                     <li><a href="{{ route('pago.realizados') }}">Pagos Realizados</a></li>
+                 </ul>
+             </li>
+
+             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                     <i class="flaticon-381-bookmark-1"></i>
+
+                     <span class="nav-text">Farmacia</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('citas') }}">Buscar Receta</a></li>
+                     <li><a href="{{ route('triaje.index') }}">Vender</a></li>
+                     <li><a href="{{ route('triaje.index') }}">Medicamentos</a></li>
                  </ul>
              </li>
 

@@ -23,6 +23,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Especialidad</th>
                                 <th>Medico</th>
                                 <th>Paciente</th>
                                 <th>Fecha</th>
@@ -34,6 +35,7 @@
                             @foreach ($citas as $cita)
                                 <tr>
                                     <td>{{ $cita->id }}</td>
+                                    <td>{{ $cita->servicio->servicio }}</td>
                                     <td>{{ $cita->medico->name }} {{ $cita->medico->last_name }}</td>
                                     <td>{{ $cita->paciente->name }} {{ $cita->paciente->last_name }}</td>
                                     <td>{{ $cita->fecha }}</td>
@@ -65,8 +67,21 @@
                         @csrf
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
+                                <p> <b>Servicio: </b> </p>
+                                <select name="idServicio" id="idServicio" onchange="getMedicos()" class="form-control show-tick">
+                                    <option value="">-- SELECCIONE --</option>
+                                    @foreach ($servicios as $servicio)
+                                        <option value="{{$servicio->id}}">{{$servicio->servicio}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p> <b>Medico: </b> </p>
-                                <select name="idMedico" id="idMedico" class="form-control show-tick">
+                                <select name="idMedico" id="idMedico" disabled  class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($medicos as $medico)
                                         <option value="{{$medico->id}}">{{$medico->name}} {{$medico->last_name}}</option>
@@ -80,7 +95,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-125 col-md-125 col-sm-12">
                                 <p> <b>Paciente: </b> </p>
-                                <select name="idPaciente" id="idPaciente" class="form-control show-tick">
+                                <select name="idPaciente" id="idPaciente" disabled class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($pacientes as $medico)
                                         <option value="{{$medico->id}}">{{$medico->name}} {{$medico->last_name}}</option>
@@ -133,6 +148,21 @@
                     <form action="{{ route('cita.update') }}" method="post" autocomplete="off" accept-charset="UTF-8"
                         enctype="multipart/form-data">
                         @csrf
+
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <p> <b>Servicio: </b> </p>
+                                <select name="idServicio" id="idServicioEdit" onchange="getMedicosEdit()" class="form-control show-tick">
+                                    <option value="">-- SELECCIONE --</option>
+                                    @foreach ($servicios as $servicio)
+                                        <option value="{{$servicio->id}}">{{$servicio->servicio}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
+
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p> <b>Medico: </b> </p>
@@ -216,11 +246,29 @@
 
         $("#idMedico").select2();
         $("#idPaciente").select2();
+        $("#idServicio").select2();
 
         function buscarHorarios() {
             axios.get('/api/getHorariosOcupados/' + $("#idMedico").val() + '/' + $("#fecha").val()).then((response) => {
                 $("#idHorario").html(response.data)
                 console.log(response.data)
+            })
+        }
+
+        function getMedicos()
+        {
+            axios.get('/api/getMedicosByServcicio/'+$("#idServicio").val()).then((response) => {
+                $("#idMedico").html(response.data)
+                $("#idMedico").attr('disabled', false)
+                $("#idPaciente").attr('disabled', false)
+            })
+        }
+
+
+        function getMedicosEdit()
+        {
+            axios.get('/api/getMedicosByServcicio/'+$("#idServicioEdit").val()).then((response) => {
+                $("#idMedicoEdit").html(response.data)
             })
         }
 
@@ -238,6 +286,7 @@
             $("#defaultModal2").modal('show');
             $("#idMedicoEdit option[value=" + cita.medico.id + "]").attr("selected", true)
             $("#idPacienteEdit option[value=" + cita.paciente.id + "]").attr("selected", true)
+            $("#idServicioEdit option[value=" + cita.idServicio + "]").attr("selected", true)
             $("#fechaEdit").val(cita.fecha)
             $("#observacionesEdit").val(cita.observaciones)
             $("#idCita").val(cita.id)

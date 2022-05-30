@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{BloquesHorarios, Citas, User};
+use App\Models\{BloquesHorarios, Citas, Servicios, User};
 
 class CitasController extends Controller
 {
     public function index()
     {
-        $citas = Citas::with(['medico', 'paciente', 'horario'])->get();
+        $citas = Citas::with(['medico', 'paciente', 'horario', 'servicio'])->get();
 
         $medicos = User::whereRolId(2)->get();
         $pacientes = User::whereRolId(4)->get();
         $horarios = BloquesHorarios::all();
-        return view('citas', compact('citas', 'medicos', 'pacientes', 'horarios'));
+        $servicios = Servicios::all();
+        return view('citas', compact('citas', 'medicos', 'pacientes', 'horarios', 'servicios'));
     }
 
     public function store(Request $request)
@@ -34,7 +35,8 @@ class CitasController extends Controller
                 'idPaciente' => $request->idPaciente,
                 'fecha' => $request->fecha,
                 'idHorario' => $request->idHorario,
-                'observaciones' => $request->observaciones
+                'observaciones' => $request->observaciones,
+                'idServicio' => $request->idServicio
             ]);
 
             return back()->with('success', 'Cita Creada correctamente');
@@ -62,7 +64,8 @@ class CitasController extends Controller
             'idPaciente' => $request->idPaciente,
             'fecha' => $request->fecha,
             'idHorario' => $request->idHorario,
-            'observaciones' => $request->observaciones
+            'observaciones' => $request->observaciones,
+            'idServicio' => $request->idServicio
         ]);
 
         return back()->with('success', 'Cita Actualizada correctamente');

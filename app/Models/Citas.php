@@ -14,7 +14,8 @@ class Citas extends Model
         'idPaciente',
         'fecha',
         'idHorario',
-        'observaciones'
+        'observaciones',
+        'idServicio'
     ];
 
     public function medico()
@@ -30,5 +31,10 @@ class Citas extends Model
     public function horario()
     {
         return $this->hasOne(BloquesHorarios::class, 'id', 'idHorario');
+    }
+
+    public function servicio()
+    {
+        return $this->hasOne(Servicios::class, 'id', 'idServicio');
     }
 }

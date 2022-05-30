@@ -112,6 +112,17 @@ class UserController extends Controller
         return $val;
     }
 
+    public function getMedicosByServcicio($idServicio)
+    {
+        $medicos = User::whereRolId(2)->where('idServicio', $idServicio)->get();
+        $html = "<option value=''>-- SELECCIONE --</option>";
+
+        foreach ($medicos as $medico ) {
+            $html .= "<option value='$medico->id'>$medico->name $medico->last_name</option>";
+        }
+
+        return $html;
+    }
 
     function upload_global($file, $folder)
     {

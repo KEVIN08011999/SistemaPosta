@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('idMedico');
             $table->integer('idPaciente');
             $table->integer('idHorario');
+            $table->integer('idServicio');
             $table->string('observaciones');
             $table->date('fecha');
             $table->timestamps();

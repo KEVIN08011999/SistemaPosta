@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Diagnostico;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,4 +61,9 @@ Route::group(['prefix' => 'pagos'], function () {
     Route::get('realizados', [PagosPacienteController::class, 'realizados'])->name('pago.realizados');
     Route::post('store', [PagosPacienteController::class, 'store'])->name('pago.store');
     Route::get('view/{idPago}', [PagosPacienteController::class, 'view'])->name('pago.view');
+});
+
+Route::group(['prefix' => 'diagnostico'], function () {
+    Route::get('/', [DiagnosticoController::class, 'index'])->name('diagnostico.index');
+    Route::post('/', [DiagnosticoController::class, 'store'])->name('diagnostico.store');
 });

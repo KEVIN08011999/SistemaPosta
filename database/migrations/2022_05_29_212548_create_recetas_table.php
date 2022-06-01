@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('dosis');
             $table->string('duracion');
             $table->string('cantidad');
+            $table->integer('estado');
             $table->timestamps();
         });
     }

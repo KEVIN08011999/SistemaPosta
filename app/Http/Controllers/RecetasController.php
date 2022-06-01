@@ -2,85 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRecetasRequest;
-use App\Http\Requests\UpdateRecetasRequest;
 use App\Models\Recetas;
+use Illuminate\Http\Request;
 
 class RecetasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
+    {
+
+    }
+
+    public function store(Request $request)
+    {
+        $receta = Recetas::create([
+            'idDiagnostico' => $request->idDiagnostico,
+            'idPaciente' => $request->idPaciente,
+            'medicamento' => $request->medicamento,
+            'presentacion' => $request->presentacion,
+            'dosis' => $request->dosis,
+            'duracion' => $request->duracion,
+            'cantidad' => $request->cantidad,
+            'estado' => 1
+        ]);
+
+        $recetas = Recetas::where('idDiagnostico', $request->idDiagnostico)->get();
+
+        $html = "";
+
+        foreach ($recetas as $receta) {
+            $html .= "<tr>";
+            $html .= "<td>$receta->medicamento</td>";
+            $html .= "<td>$receta->presentacion</td>";
+            $html .= "<td>$receta->dosis</td>";
+            $html .= "<td>$receta->duracion</td>";
+            $html .= "<td>$receta->cantidad</td>";
+            $html .= "</tr>";
+        }
+
+        return $html;
+    }
+
+
+    public function update()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRecetasRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRecetasRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Recetas  $recetas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Recetas $recetas)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Recetas  $recetas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Recetas $recetas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRecetasRequest  $request
-     * @param  \App\Models\Recetas  $recetas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRecetasRequest $request, Recetas $recetas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Recetas  $recetas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Recetas $recetas)
-    {
-        //
-    }
 }

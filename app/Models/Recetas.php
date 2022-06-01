@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Recetas extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'idDiagnostico',
+        'idPaciente',
+        'medicamento',
+        'presentacion',
+        'dosis',
+        'duracion',
+        'cantidad',
+        'estado',
+    ];
 }

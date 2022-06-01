@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('diagostico')->nullable();
             $table->text('tratamiento')->nullable();
             $table->integer('tipo_diagnostico')->nullable();
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }

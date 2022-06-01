@@ -15,7 +15,7 @@ class PagosPacienteController extends Controller
 
     public function realizados()
     {
-        $pagos = PagosPaciente::whereFechaGeneracion(date('Y-m-d'))->whereEstado(2)->with(['paciente', 'servicio'])->get();
+        $pagos = PagosPaciente::whereEstado(2)->with(['paciente', 'servicio'])->get();
         return view('pagos.list', compact('pagos'));
     }
 

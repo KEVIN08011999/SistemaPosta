@@ -53,7 +53,8 @@
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('pago.index') }}">Servicios Adicionales</a></li>
-                     <li><a href="{{ route('pago.realizados') }}">Diagnostico</a></li>
+                     <li><a href="{{ route('diagnostico.index') }}">Diagnostico</a></li>
+                     <li><a href="{{ route('pacientes') }}">Historia Clinica</a></li>
                  </ul>
              </li>
 

@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDiagnosticoRequest;
-use App\Http\Requests\UpdateDiagnosticoRequest;
-use App\Models\Diagnostico;
+use App\Models\{Diagnostico};
+use Illuminate\Http\Request;
 
 class DiagnosticoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $diagnosticos = Diagnostico::where('estado', 1)->with(['cita', 'cita.medico', 'cita.paciente', 'cita.servicio', 'triaje'])->get();
+
+        return view('diagnosticos.list', compact('diagnosticos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreDiagnosticoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreDiagnosticoRequest $request)
+    public function store(Request $request)
     {
-        //
+
+        $new = Diagnostico::updateOrCreate(
+            [ 'id' => $request->idDiagnostico ],
+            [
+            'motivo' => $request->motivo,
+            'antecedentes' => $request->antecedentes,
+            'tiempo_enfermedad' => $request->tiempo_enfermedad,
+            'alergias' => $request->alergias,
+            'intervenciones' => $request->intervenciones,
+            'vacunas' => $request->vacunas,
+            'examen' => $request->examen,
+            'diagostico' => $request->diagnostico,
+            'tratamiento' => $request->tratamiento,
+            'tipo_diagnostico' => $request->tipo_diagnostico,
+            'estado' => 2
+        ]);
+
+        return back()->with('success', 'Diagnostico Agregado a la historia clinica');
     }
 
     /**
@@ -68,7 +66,7 @@ class DiagnosticoController extends Controller
      * @param  \App\Models\Diagnostico  $diagnostico
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDiagnosticoRequest $request, Diagnostico $diagnostico)
+    public function update()
     {
         //
     }

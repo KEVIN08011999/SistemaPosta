@@ -23,5 +23,16 @@ class Diagnostico extends Model
         'diagostico',
         'tratamiento',
         'tipo_diagnostico',
+        'estado'
     ];
+
+    public function cita()
+    {
+        return $this->hasOne(Citas::class, 'id', 'idCita');
+    }
+
+    public function triaje()
+    {
+        return $this->hasOne(Triaje::class, 'id', 'idTriaje');
+    }
 }

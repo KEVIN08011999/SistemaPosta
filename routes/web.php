@@ -77,3 +77,7 @@ Route::group(['prefix' => 'diagnostico'], function () {
 Route::group(['prefix' => 'farmacia'], function () {
     Route::get('/', [UserController::class, 'listadoRecetas'])->name('farmacia.index');
 });
+
+Route::group(['prefix' => 'pdfs'], function () {
+    Route::get('/receta/{cita}', [PDFController::class, 'receta'])->name('pdf.receta');
+});

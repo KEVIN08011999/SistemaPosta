@@ -4,7 +4,8 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Historia Clinica: ({{$paciente->document}}) - {{$paciente->name}} {{$paciente->last_name}}</h4>
+                <h4 class="card-title">Historia Clinica: ({{ $paciente->document }}) - {{ $paciente->name }}
+                    {{ $paciente->last_name }}</h4>
             </div>
             <div class="card-body">
 
@@ -27,18 +28,23 @@
                         </thead>
                         <tbody>
                             @foreach ($citas as $cita)
-                                <tr>
-                                    <td> {{$cita->fecha}} </td>
-                                    <td> {{$cita->servicio->servicio}} </td>
-                                    <td class="text-center">
-                                        <i onclick="verDiagnostico({{$cita}})" class="fa fa-eye btn btn-info text-white"></i>
-                                        <i class="fa fa-file btn btn-danger text-white"></i>
-                                    </td>
-                                    <td class="text-center">
-                                        <i onclick="verReceta({{$cita}})" class="fa fa-eye btn btn-warning text-white"></i>
-                                        <i class="fa fa-file btn btn-danger text-white"></i>
-                                    </td>
-                                </tr>
+                                @if ($cita->diagnostico->motivo != null)
+                                    <tr>
+                                        <td> {{ $cita->fecha }} </td>
+                                        <td> {{ $cita->servicio->servicio }} </td>
+                                        <td class="text-center">
+                                            <i onclick="verDiagnostico({{ $cita }})"
+                                                class="fa fa-eye btn btn-info text-white"></i>
+                                            <i class="fa fa-file btn btn-danger text-white"></i>
+                                        </td>
+                                        <td class="text-center">
+                                            <i onclick="verReceta({{ $cita }})"
+                                                class="fa fa-eye btn btn-warning text-white"></i>
+                                            <a href="{{ route('pdf.receta', $cita) }}"><i
+                                                    class="fa fa-file btn btn-danger text-white"></i></a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -56,8 +62,8 @@
                     <h4 class="title" id="defaultModalLabel">Diagnostico</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('diagnostico.store') }}" method="post" autocomplete="off" accept-charset="UTF-8"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('diagnostico.store') }}" method="post" autocomplete="off"
+                        accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix">
                             <div class="col-md-4">
@@ -147,7 +153,8 @@
 
                             <div class="col-md-4">
                                 <p> <b>Tiempo de Sintomas: </b> </p>
-                                <input type="text" class="form-control" disabled id="tiempo_efermedad" name="tiempo_enfermedad">
+                                <input type="text" class="form-control" disabled id="tiempo_efermedad"
+                                    name="tiempo_enfermedad">
 
                                 <p> <b>Alergias: </b> </p>
                                 <input type="text" class="form-control" name="alergias" id="alergias">
@@ -162,7 +169,8 @@
 
                             <div class="col-md-4">
                                 <p> <b>Intervenciones: </b> </p>
-                                <input type="text" class="form-control" name="intervenciones" id="intervenciones" disabled>
+                                <input type="text" class="form-control" name="intervenciones" id="intervenciones"
+                                    disabled>
                             </div>
                         </div>
 
@@ -218,8 +226,8 @@
                     <h4 class="title" id="defaultModalLabel">Receta</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('diagnostico.store') }}" method="post" autocomplete="off" accept-charset="UTF-8"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('diagnostico.store') }}" method="post" autocomplete="off"
+                        accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix" style="margin-top: 15px">
                             <div class="col-md-12">
@@ -286,8 +294,7 @@
             }
         });
 
-        function verDiagnostico(cita)
-        {
+        function verDiagnostico(cita) {
             $("#paciente").val(cita.paciente.name + ' ' + cita.paciente.last_name)
             $("#medico").val(cita.medico.name + ' ' + cita.medico.last_name)
             $("#servicio").val(cita.servicio.servicio)
@@ -310,18 +317,17 @@
             $("#diagnostico").val(cita.diagnostico.diagostico)
             $("#tratamiento").val(cita.diagnostico.tratamiento)
 
-            axios.get('/api/receta/'+cita.diagnostico.id).then((response) => {
+            axios.get('/api/receta/' + cita.diagnostico.id).then((response) => {
                 $("#recetas").html(response.data)
                 $("#defaultModal").modal('show')
             })
         }
 
-        function verReceta(cita)
-        {
+        function verReceta(cita) {
             $("#diagnosticoReceta").html(cita.diagnostico.diagostico)
             $("#tratamientoReceta").html(cita.diagnostico.tratamiento)
 
-            axios.get('/api/receta/'+cita.diagnostico.id).then((response) => {
+            axios.get('/api/receta/' + cita.diagnostico.id).then((response) => {
                 $("#recetasReceta").html(response.data)
                 $("#defaultModal2").modal('show')
             })

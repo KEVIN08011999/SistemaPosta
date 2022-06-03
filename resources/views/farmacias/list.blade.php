@@ -157,10 +157,16 @@
 
             diagnosticos.forEach(function(diagnostico, index) {
                 console.log(diagnostico)
-                $("#recetasLista").append("<tr><td>" + diagnostico.diagnostico.diagostico + "</td><td>" +
-                    diagnostico.fecha + "</td><td><i onclick='verReceta(" + diagnostico.diagnostico.id +
+                if(diagnostico.diagnostico.diagostico != null)
+                {
+                    $("#recetasLista").append("<tr><td>" + diagnostico.diagnostico.diagostico + "</td><td>" +
+                    diagnostico.fecha + "</td><td><a href='/pdfs/receta/"+diagnostico.id+"'><i class='fa fa-file btn btn-danger text-white'></i></a><i onclick='verReceta(" + diagnostico.diagnostico.id +
                     ")' class='fa fa-eye text-white btn btn-success'></i></td></tr>");
+                }
+
             });
+
+
             $("#defaultModal2").modal('show')
         }
 

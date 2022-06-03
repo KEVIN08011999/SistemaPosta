@@ -26,41 +26,25 @@ class MedicamentosController extends Controller
             'presentacion' => $request->presentacion
         ]);
 
-        return back()->with('success', 'Medicmaneot Creado con exito');
+        return back()->with('success', 'Medicamento Creado con exito');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Medicamentos  $medicamentos
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Medicamentos $medicamentos)
+    public function update(Request $request)
     {
-        //
-    }
+        $medicamento =
+        Medicamentos::updateOrCreate(
+            ['id' => $request->idMedicamento],
+            [
+            'nombre' => $request->nombre,
+            'precio_unidad' => $request->precio_unidad,
+            'precio_empaque' => $request->precio_empaque,
+            'cantidad_unidades_empaque' => $request->cantidad_unidades_empaque,
+            'stock_unidades' => $request->stock_empaque * $request->cantidad_unidades_empaque,
+            'stock_empaque' => $request->stock_empaque,
+            'presentacion' => $request->presentacion
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Medicamentos  $medicamentos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Medicamentos $medicamentos)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMedicamentosRequest  $request
-     * @param  \App\Models\Medicamentos  $medicamentos
-     * @return \Illuminate\Http\Response
-     */
-    public function update()
-    {
-        //
+        return back()->with('success', 'Medicamento Actualizado con exito');
     }
 
     /**

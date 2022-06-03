@@ -35,7 +35,7 @@
                                 <td>{{ $medicamento->precio_empaque }} ({{ $medicamento->precio_unidad }})</td>
                                 <td>{{ $medicamento->stock_empaque }} ({{ $medicamento->stock_unidades }})</td>
                                 <td style="font-size: 25px">
-                                    <i class="fa fa-edit text-success" onclick="editarHorario({{$medicamento}})"></i>
+                                    <i class="fa fa-edit text-success" onclick="editarMedicamento({{$medicamento}})"></i>
                                 </td>
                             </tr>
                         @endforeach
@@ -127,24 +127,63 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="title" id="defaultModalLabel">Editar Horario</h4>
+                    <h4 class="title" id="defaultModalLabel">Editar Medicamento</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('horario.update') }}" method="post" autocomplete="off" accept-charset="UTF-8"
+                    <form action="{{ route('farmacia.medicamentos.update') }}" method="post" autocomplete="off" accept-charset="UTF-8"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="">Inicio</label>
-                                    <input type="time" name="inicio" id="inicio" class="form-control" placeholder="">
-                                    <input type="hidden" name="idHorario" id="idHorario" class="form-control" placeholder="">
+                                    <label for="">Nombre</label>
+                                    <input type="text" name="nombre" id="nombreEdit" class="form-control" placeholder="">
+                                    <input type="hidden" name="idMedicamento" id="idEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="">Fin</label>
-                                    <input type="time" name="fin" id="fin" class="form-control" placeholder="">
+                                    <label for="">Cantidad Empaque</label>
+                                    <input type="text" name="cantidad_unidades_empaque" id="cantidadEdit" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Stock Empaques</label>
+                                    <input type="text" name="stock_empaque" onblur="calcularCantidad2()" id="empaquesEdit" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Stock Unidades</label>
+                                    <input type="text"  name="stock_unidades" id="unidadesEdit" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Precio Empaques</label>
+                                    <input type="text" name="precio_empaque" id="precioEmpaqueEdit" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Precio Unidades</label>
+                                    <input type="text" name="precio_unidad" id="precioUnidadEdit" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Presentacion</label>
+                                    <input type="text" name="presentacion" id="presentacionEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -184,6 +223,27 @@
             cantidad = $("#cantidad").val()
 
             $("#unidades").val(empaque * cantidad)
+        }
+
+        function calcularCantidad2()
+        {
+            empaque = $("#empaquesEdit").val()
+            cantidad = $("#cantidadEdit").val()
+
+            $("#unidadesEdit").val(empaque * cantidad)
+        }
+
+        function editarMedicamento(medicamento)
+        {
+            $('#nombreEdit').val(medicamento.nombre)
+            $('#idEdit').val(medicamento.id)
+            $('#cantidadEdit').val(medicamento.cantidad_unidades_empaque)
+            $('#empaquesEdit').val(medicamento.stock_empaque)
+            $('#unidadesEdit').val(medicamento.stock_unidades)
+            $('#precioEmpaqueEdit').val(medicamento.precio_empaque)
+            $('#precioUnidadEdit').val(medicamento.precio_unidad)
+            $('#presentacionEdit').val(medicamento.presentacion)
+            $("#defaultModal2").modal('show')
         }
     </script>
 @endsection

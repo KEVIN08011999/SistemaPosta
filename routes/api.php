@@ -9,3 +9,4 @@ Route::get('getHorariosOcupados/{idMedico}/{fecha}', [CitasController::class, 'g
 Route::get('validarDocumento/{document}', [UserController::class, 'validardocumento']);
 Route::get('getMedicosByServcicio/{idServicio}', [UserController::class, 'getMedicosByServcicio']);
 Route::post('receta', [RecetasController::class, 'store']);
+Route::get('receta/{diagnostico}', [RecetasController::class, 'index']);

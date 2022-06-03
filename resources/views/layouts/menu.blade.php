@@ -32,6 +32,7 @@
                  <ul aria-expanded="false">
                      <li><a href="{{ route('citas') }}">Citas</a></li>
                      <li><a href="{{ route('triaje.index') }}">Triaje</a></li>
+                     <li><a href="{{ route('diagnostico.index') }}">Diagnostico</a></li>
                  </ul>
              </li>
 
@@ -46,17 +47,17 @@
                  </ul>
              </li>
 
-             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+             {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                      <i class="flaticon-381-bookmark-1"></i>
 
                      <span class="nav-text">Pacientes</span>
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('pago.index') }}">Servicios Adicionales</a></li>
-                     <li><a href="{{ route('diagnostico.index') }}">Diagnostico</a></li>
+
                      <li><a href="{{ route('pacientes') }}">Historia Clinica</a></li>
                  </ul>
-             </li>
+             </li> --}}
 
              <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                      <i class="flaticon-381-bookmark-1"></i>
@@ -64,8 +65,9 @@
                      <span class="nav-text">Farmacia</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('citas') }}">Buscar Receta</a></li>
+                     <li><a href="{{ route('farmacia.index') }}">Buscar Receta</a></li>
                      <li><a href="{{ route('triaje.index') }}">Vender</a></li>
+                     <li><a href="{{ route('triaje.index') }}">Ventas</a></li>
                      <li><a href="{{ route('triaje.index') }}">Medicamentos</a></li>
                  </ul>
              </li>
@@ -80,6 +82,7 @@
                  <ul aria-expanded="false">
                      <li><a href="{{ route('horarios.index') }}">Bloques Horarios</a></li>
                      <li><a href="{{ route('servicios.index') }}">Servicios</a></li>
+                     <li><a href="{{ route('empresa.index') }}">Informacion Clinica</a></li>
                  </ul>
              </li>
          </ul>

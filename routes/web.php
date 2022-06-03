@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagnostico;
+use App\Models\Empresa;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,9 +41,11 @@ Route::group(['prefix' => 'citas'], function () {
 
 
 Route::group(['prefix' => 'configuraciones'], function () {
-    Route::get('/', [BloquesHorariosController::class, 'index'])->name('horarios.index');
+    Route::get('horarios', [BloquesHorariosController::class, 'index'])->name('horarios.index');
     Route::post('bloquesHorarios', [BloquesHorariosController::class, 'store'])->name('horario.store');
     Route::post('updateHorario', [BloquesHorariosController::class, 'update'])->name('horario.update');
+    Route::get('clinica', [EmpresaController::class, 'index'])->name('empresa.index');
+    Route::post('clinica', [EmpresaController::class, 'update'])->name('empresa.store');
 });
 
 Route::group(['prefix' => 'servicios'], function () {
@@ -66,4 +70,10 @@ Route::group(['prefix' => 'pagos'], function () {
 Route::group(['prefix' => 'diagnostico'], function () {
     Route::get('/', [DiagnosticoController::class, 'index'])->name('diagnostico.index');
     Route::post('/', [DiagnosticoController::class, 'store'])->name('diagnostico.store');
+    Route::get('/historia-clinica/{paciente}', [DiagnosticoController::class, 'historiaclinica'])->name('paciente.historiaclinica');
+});
+
+
+Route::group(['prefix' => 'farmacia'], function () {
+    Route::get('/', [UserController::class, 'listadoRecetas'])->name('farmacia.index');
 });

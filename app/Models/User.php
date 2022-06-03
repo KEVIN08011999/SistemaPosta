@@ -40,11 +40,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -52,5 +47,15 @@ class User extends Authenticatable
     public function servicio()
     {
         return $this->hasOne(Servicios::class, 'id', 'idServicio');
+    }
+
+    public function citas()
+    {
+        return $this->hasOne(Citas::class, 'idPaciente', 'id');
+    }
+
+    public function citas_data()
+    {
+        return $this->hasMany(Citas::class, 'idPaciente', 'id');
     }
 }

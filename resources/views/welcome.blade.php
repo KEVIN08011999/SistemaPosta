@@ -1,73 +1,66 @@
-<!doctype html>
-<html class="no-js " lang="en">
-<head>
-<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 
-    <title>:: Inicio de Sesion ::</title>
-    <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/authentication.css">
-    <link rel="stylesheet" href="assets/css/color_skins.css">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>:: INICIO DE SESION ::</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
 
-<body class="theme-purple authentication sidebar-collapse">
+<body class="h-100">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4 text-white">Inicia Sesion</h4>
+                                    <form class="form" method="post" action="{{ route('login') }}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label class="mb-1 text-white"><strong>Usuario</strong></label>
+                                            <input type="text" class="form-control" name="usuario"
+                                                placeholder="Usuario">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1 text-white"><strong>Clave</strong></label>
+                                            <input type="password" placeholder="Clave" name="clave"
+                                                class="form-control" />
+                                        </div>
 
-<div class="page-header">
-    <div class="page-header-image" style="background-image:url(assets/images/login.jpg)"></div>
-    <div class="container">
-        <div class="col-md-12 content-center">
-            <div class="card-plain">
-                <form class="form" method="post" action="{{route('login')}}">
-                    @csrf
-                    <div class="header">
-                        <div class="logo-container">
-                            <img src="assets/images/logo.svg" alt="">
-                        </div>
-                        <h5>INICIAR SESION</h5>
-                    </div>
-                    <div class="content">
-                        <div class="input-group input-lg">
-                            <input type="text" class="form-control" name="usuario" placeholder="Usuario">
-                            <span class="input-group-addon">
-                                <i class="zmdi zmdi-account-circle"></i>
-                            </span>
-                        </div>
-                        <div class="input-group input-lg">
-                            <input type="password" placeholder="Clave" name="clave" class="form-control" />
-                            <span class="input-group-addon">
-                                <i class="zmdi zmdi-lock"></i>
-                            </span>
+                                        <div class="text-center">
+                                            <button type="submit"
+                                                class="btn bg-white text-primary btn-block">Iniciar</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="footer text-center">
-                        <button class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">INICIAR SESION</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Jquery Core Js -->
-<script src="assets/bundles/libscripts.bundle.js"></script>
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 
-<script>
-   $(".navbar-toggler").on('click',function() {
-    $("html").toggleClass("nav-open");
-});
-//=============================================================================
-$('.form-control').on("focus", function() {
-    $(this).parent('.input-group').addClass("input-group-focus");
-}).on("blur", function() {
-    $(this).parent(".input-group").removeClass("input-group-focus");
-});
-</script>
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="./vendor/global/global.min.js"></script>
+    <script src="./js/custom.min.js"></script>
+    <script src="./js/deznav-init.js"></script>
+
 </body>
+
 </html>

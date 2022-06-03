@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Diagnostico};
+use App\Models\{Citas, Diagnostico, User};
 use Illuminate\Http\Request;
 
 class DiagnosticoController extends Controller
@@ -37,48 +37,17 @@ class DiagnosticoController extends Controller
         return back()->with('success', 'Diagnostico Agregado a la historia clinica');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Diagnostico  $diagnostico
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Diagnostico $diagnostico)
+
+    public function historiaclinica($paciente)
     {
-        //
+        $paciente = User::find($paciente);
+        $citas = Citas::where('idPaciente', $paciente->id)
+                        ->with(['medico', 'servicio', 'diagnostico', 'diagnostico.triaje', 'paciente'])
+                        ->orderBy('id', 'desc')
+                        ->get();
+
+        return view('historias.list', compact('paciente', 'citas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Diagnostico  $diagnostico
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Diagnostico $diagnostico)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDiagnosticoRequest  $request
-     * @param  \App\Models\Diagnostico  $diagnostico
-     * @return \Illuminate\Http\Response
-     */
-    public function update()
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Diagnostico  $diagnostico
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Diagnostico $diagnostico)
-    {
-        //
-    }
 }

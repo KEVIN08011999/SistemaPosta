@@ -124,6 +124,13 @@ class UserController extends Controller
         return $html;
     }
 
+    public function listadoRecetas()
+    {
+        $usuarios = User::whereRolId(4)->with(['citas_data', 'citas_data.diagnostico', 'citas_data.diagnostico.recetas'])->get();
+
+        return view('farmacias.list', compact('usuarios'));
+    }
+
     function upload_global($file, $folder)
     {
 

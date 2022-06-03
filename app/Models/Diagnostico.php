@@ -35,4 +35,9 @@ class Diagnostico extends Model
     {
         return $this->hasOne(Triaje::class, 'id', 'idTriaje');
     }
+
+    public function recetas()
+    {
+        return $this->hasMany(Recetas::class, 'idDiagnostico', 'id');
+    }
 }

@@ -8,14 +8,23 @@ use Illuminate\Http\Request;
 class RecetasController extends Controller
 {
 
-    public function index()
+    public function index($diagnostico)
     {
-        //
-    }
+        $recetas = Recetas::where('idDiagnostico', $diagnostico)->get();
 
-    public function create(Request $request)
-    {
+        $html = "";
 
+        foreach ($recetas as $receta) {
+            $html .= "<tr>";
+            $html .= "<td>$receta->medicamento</td>";
+            $html .= "<td>$receta->presentacion</td>";
+            $html .= "<td>$receta->dosis</td>";
+            $html .= "<td>$receta->duracion</td>";
+            $html .= "<td>$receta->cantidad</td>";
+            $html .= "</tr>";
+        }
+
+        return $html;
     }
 
     public function store(Request $request)

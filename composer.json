@@ -1,11 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "armandocamposf/clinica",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Sistema de gestion de clinicas.",
+    "keywords": ["clinicas", "hospitales"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.14.1",

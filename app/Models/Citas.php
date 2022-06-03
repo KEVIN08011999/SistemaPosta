@@ -38,4 +38,9 @@ class Citas extends Model
     {
         return $this->hasOne(Servicios::class, 'id', 'idServicio');
     }
+
+    public function diagnostico()
+    {
+        return $this->hasOne(Diagnostico::class, 'idCita', 'id');
+    }
 }

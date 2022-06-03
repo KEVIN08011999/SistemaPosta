@@ -45,7 +45,10 @@
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->user }}</td>
                                     <td>
-                                        <i class="fa fa-edit text-success"
+                                        @if ($tipo == 'Pacientes')
+                                        <a href="{{route('paciente.historiaclinica', $usuario->id)}}" class="btn btn-success">Historia Clinica</a>
+                                        @endif
+                                        <i class="fa fa-edit text-white btn btn-info"
                                             onclick="editarUsuario({{ $usuario->id }})"></i>
                                     </td>
                                 </tr>

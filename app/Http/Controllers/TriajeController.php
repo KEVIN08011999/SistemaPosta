@@ -26,10 +26,12 @@ class TriajeController extends Controller
             'talla' => $request->talla
         ]);
 
+        $paciente =  Citas::whereId($request->idCita)->with('paciente')->first();
+
         Diagnostico::create([
             'idCita' => $request->idCita,
             'idTriaje' => $triaje->id,
-            'idPaciente' => 0
+            'idPaciente' => $paciente->paciente->id
         ]);
 
         $cita = Citas::find($request->idCita);

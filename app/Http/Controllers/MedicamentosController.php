@@ -2,41 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMedicamentosRequest;
-use App\Http\Requests\UpdateMedicamentosRequest;
-use App\Models\Medicamentos;
+use App\Models\{Medicamentos};
+use Illuminate\Http\Request;
 
 class MedicamentosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $medicamentos = Medicamentos::all();
+        return view('farmacias.medicamentos', compact('medicamentos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMedicamentosRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMedicamentosRequest $request)
+    public function store(Request $request)
     {
-        //
+        Medicamentos::updateOrCreate([
+            'nombre' => $request->nombre,
+            'precio_unidad' => $request->precio_unidad,
+            'precio_empaque' => $request->precio_empaque,
+            'cantidad_unidades_empaque' => $request->cantidad_unidades_empaque,
+            'stock_unidades' => $request->stock_empaque * $request->cantidad_unidades_empaque,
+            'stock_empaque' => $request->stock_empaque,
+            'presentacion' => $request->presentacion
+        ]);
+
+        return back()->with('success', 'Medicmaneot Creado con exito');
     }
 
     /**
@@ -68,7 +58,7 @@ class MedicamentosController extends Controller
      * @param  \App\Models\Medicamentos  $medicamentos
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMedicamentosRequest $request, Medicamentos $medicamentos)
+    public function update()
     {
         //
     }

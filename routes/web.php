@@ -76,6 +76,9 @@ Route::group(['prefix' => 'diagnostico'], function () {
 
 Route::group(['prefix' => 'farmacia'], function () {
     Route::get('/', [UserController::class, 'listadoRecetas'])->name('farmacia.index');
+    Route::get('/punto-venta', [FarmaciaController::class, 'index'])->name('farmacia.vender');
+    Route::get('/medicamentos', [MedicamentosController::class, 'index'])->name('farmacia.medicamentos');
+    Route::post('/medicamentos', [MedicamentosController::class, 'store'])->name('farmacia.medicamentos.store');
 });
 
 Route::group(['prefix' => 'pdfs'], function () {

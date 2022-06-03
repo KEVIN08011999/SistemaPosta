@@ -35,7 +35,8 @@
                                         <td class="text-center">
                                             <i onclick="verDiagnostico({{ $cita }})"
                                                 class="fa fa-eye btn btn-info text-white"></i>
-                                            <i class="fa fa-file btn btn-danger text-white"></i>
+                                                <a href="{{ route('pdf.diagnostico', $cita) }}">
+                                            <i class="fa fa-file btn btn-danger text-white"></i></a>
                                         </td>
                                         <td class="text-center">
                                             <i onclick="verReceta({{ $cita }})"

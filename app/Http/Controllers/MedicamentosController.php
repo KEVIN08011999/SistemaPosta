@@ -47,14 +47,9 @@ class MedicamentosController extends Controller
         return back()->with('success', 'Medicamento Actualizado con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Medicamentos  $medicamentos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Medicamentos $medicamentos)
+
+    public function get(Medicamentos $medicamento)
     {
-        //
+        return $medicamento;
     }
 }

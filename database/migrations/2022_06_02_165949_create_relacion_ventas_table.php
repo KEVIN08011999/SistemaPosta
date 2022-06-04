@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('idVenta');
             $table->integer('idProducto');
-            $table->integer('presentacion');
             $table->integer('cantidad');
             $table->float('total');
+            $table->float('tipo');
             $table->timestamps();
         });
     }

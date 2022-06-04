@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->integer('idCliente')->nullable();
-            $table->float('sub_total');
-            $table->float('igv');
+            $table->float('sub_total')->nullable();
+            $table->float('igv')->nullable();
             $table->integer('idDiadnostico')->nullable();
-            $table->integer('tipo_pago');
+            $table->integer('tipo_pago')->nullable();
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             @foreach ($citas as $cita)
-                                @if ($cita->diagnostico->motivo != null)
+                                @if ($cita->diagnostico != null)
                                     <tr>
                                         <td> {{ $cita->fecha }} </td>
                                         <td> {{ $cita->servicio->servicio }} </td>

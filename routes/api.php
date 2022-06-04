@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recetas;
 use App\Models\RelacionVentas;
+use App\Models\Ventas;
 use Illuminate\Support\Facades\Route;
 
 Route::get('usuario/{usuario}', [UserController::class, 'get']);
@@ -13,3 +14,4 @@ Route::post('receta', [RecetasController::class, 'store']);
 Route::get('receta/{diagnostico}', [RecetasController::class, 'index']);
 Route::get('medicamento/{medicamento}', [MedicamentosController::class, 'get']);
 Route::post('agregarproducto', [RelacionVentasController::class, 'store']);
+Route::post('guardarVenta', [VentasController::class, 'update']);

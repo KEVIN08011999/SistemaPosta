@@ -81,6 +81,7 @@ Route::group(['prefix' => 'farmacia'], function () {
     Route::post('/medicamentos', [MedicamentosController::class, 'store'])->name('farmacia.medicamentos.store');
     Route::post('/medicamento', [MedicamentosController::class, 'update'])->name('farmacia.medicamentos.update');
     Route::get('vender', [FarmaciaController::class, 'index'])->name('farmacia.venta');
+    Route::get('ventas', [FarmaciaController::class, 'show'])->name('farmacia.ventas');
 });
 
 Route::group(['prefix' => 'pdfs'], function () {

@@ -99,32 +99,44 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="title" id="defaultModalLabel">Crear Horario</h4>
+                    <h4 class="title" id="defaultModalLabel">Cobrar</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('horario.store') }}" method="post" autocomplete="off" accept-charset="UTF-8"
-                        enctype="multipart/form-data">
-                        @csrf
                         <div class="row clearfix">
-                            <div class="col-sm-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Inicio</label>
-                                    <input type="time" name="inicio" class="form-control" placeholder="">
+                                    <label for="">Tipo de Pago</label>
+                                    <select name="" class="form-control" onchange="mostrar()" id="tipopago">
+                                        <option value="">SELECCIONE</option>
+                                        <option value="1">EFECTIVO</option>
+                                        <option value="2">TARJETA</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">Fin</label>
-                                    <input type="time" name="fin" class="form-control" placeholder="">
-                                </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <label for="">Total</label>
+                                <input type="text" class="form-control" disabled id="totalmdal">
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <label for="">Paga con</label>
+                                <input type="text" onblur="calcular()" class="form-control" disabled id="monto">
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <label for="">Vuelto</label>
+                                <input type="text" class="form-control" disabled id="vuelto">
                             </div>
                         </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">CERRAR</button>
-                    <button type="submit" class="btn btn-success btn-round waves-effect">GUARDAR</button>
-                    </form>
+                    <button type="button" onclick="guardarVenta()" class="btn btn-success btn-round waves-effect">GUARDAR</button>
                 </div>
             </div>
         </div>
@@ -134,6 +146,9 @@
 @section('scripts')
     <script>
         var data = ""
+        var total = ""
+
+
 
         function medicamento() {
             axios.get('/api/medicamento/' + $("#idProducto").val()).then((response) => {
@@ -157,14 +172,47 @@
                 console.log(response.data)
                 $("#data_factura").html(response.data.html)
                 $("#total").html('S/' +response.data.total)
+                this.total = response.data.total
                 $("#producto")[0].reset();
             })
         }
 
         function cobrar()
         {
-
+            $("#defaultModal").modal('show')
+            $("#totalmdal").val('S/' +this.total)
         }
+
+        function mostrar()
+        {
+            if($("#tipopago").val() == 1)
+            {
+                $("#monto").attr('disabled', false)
+            }
+        }
+
+        function calcular()
+        {
+            monto = $("#monto").val()
+            valor = monto - this.total
+            $("#vuelto").val(valor)
+        }
+
+        function guardarVenta()
+        {
+            const data = {
+                idCliente : $("#idPaciente2").val(),
+                total : this.total,
+                tipo_pago: $("#tipopago").val(),
+                idVenta: $("#idVenta").val()
+            }
+
+            axios.post('/api/guardarVenta', data).then((response) => {
+
+            })
+        }
+
+
 
         // var table2 = $('#example').DataTable({
         //     createdRow: function(row, data, index) {

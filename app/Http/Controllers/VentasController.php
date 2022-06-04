@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreVentasRequest;
 use App\Http\Requests\UpdateVentasRequest;
 use App\Models\Ventas;
+use Illuminate\Http\Request;
 
 class VentasController extends Controller
 {
@@ -68,9 +69,16 @@ class VentasController extends Controller
      * @param  \App\Models\Ventas  $ventas
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVentasRequest $request, Ventas $ventas)
+    public function update(Request $request)
     {
-        //
+        $venta = Ventas::find($request->idVenta);
+        $venta->idCliente = $request->idCliente;
+        $venta->sub_total = $request->total;
+        $venta->tipo_pago = $request->tipo_pago;
+        $venta->estado = 2;
+        $venta->save();
+
+        return 200;
     }
 
     /**

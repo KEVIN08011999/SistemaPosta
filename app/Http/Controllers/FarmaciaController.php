@@ -17,4 +17,14 @@ class FarmaciaController extends Controller
         $medicos = User::whereIdRol(2);
         return view('farmacias.pos', compact('medicamentos', 'pacientes', 'venta','servicios', 'pacientes', 'medicos'));
     }
+
+    public function show()
+    {
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereRolId(4)->get();
+
+        return view('farmacias.list', compact('servicios', 'pacientes', 'medicos'));
+
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{PagosPaciente};
+use App\Models\{PagosPaciente, Servicios, User};
 use Illuminate\Http\Request;
 
 class PagosPacienteController extends Controller
@@ -10,13 +10,19 @@ class PagosPacienteController extends Controller
     public function index()
     {
         $pagos = PagosPaciente::whereFechaGeneracion(date('Y-m-d'))->whereEstado(1)->with(['paciente', 'servicio'])->get();
-        return view('pagos.list', compact('pagos'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('pagos.list', compact('pagos','servicios', 'pacientes', 'medicos'));
     }
 
     public function realizados()
     {
         $pagos = PagosPaciente::whereEstado(2)->with(['paciente', 'servicio'])->get();
-        return view('pagos.list', compact('pagos'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('pagos.list', compact('pagos','servicios', 'pacientes', 'medicos'));
     }
 
     public function store(Request $request)
@@ -36,8 +42,10 @@ class PagosPacienteController extends Controller
     public function view( $idPago)
     {
         $pago = PagosPaciente::whereId($idPago)->with(['paciente', 'servicio'])->first();
-
-        return view('pagos.view', compact('pago'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('pagos.view', compact('pago','servicios', 'pacientes', 'medicos'));
     }
 
 }

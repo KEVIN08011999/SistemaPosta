@@ -83,7 +83,7 @@
                         </tr>
                         <tr>
                             <td colspan="6" style="text-align: right; font-size: 20px" >
-                                <button class="w-100 btn btn-success">Cobrar</button>
+                                <button onclick="cobrar()" class="w-100 btn btn-success">Cobrar</button>
                             </td>
                         </tr>
                     </tfoot>
@@ -95,6 +95,40 @@
 @endsection
 
 @section('modales')
+<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title" id="defaultModalLabel">Crear Horario</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('horario.store') }}" method="post" autocomplete="off" accept-charset="UTF-8"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Inicio</label>
+                                    <input type="time" name="inicio" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Fin</label>
+                                    <input type="time" name="fin" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">CERRAR</button>
+                    <button type="submit" class="btn btn-success btn-round waves-effect">GUARDAR</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -125,6 +159,11 @@
                 $("#total").html('S/' +response.data.total)
                 $("#producto")[0].reset();
             })
+        }
+
+        function cobrar()
+        {
+
         }
 
         // var table2 = $('#example').DataTable({

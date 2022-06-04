@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Empresa};
+use App\Models\{Empresa, User, Servicios};
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -10,8 +10,10 @@ class EmpresaController extends Controller
     public function index()
     {
         $empresa = Empresa::first();
-
-        return view('config.empresa', compact('empresa'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('config.empresa', compact('empresa', 'servicios', 'pacientes', 'medicos'));
     }
 
     public function update( Request $request )

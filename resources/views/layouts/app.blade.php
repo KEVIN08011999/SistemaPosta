@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{asset('assets/vendor/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/css/select2.min.css') }}">
 
     <!-- Datatable -->
     <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -111,7 +113,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
 
-                                    <a href="{{route('logout')}}" class="dropdown-item ai-icon">
+                                    <a href="{{ route('logout') }}" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
                                             width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -148,6 +150,96 @@
             <div class="container-fluid">
                 <!-- Add Order -->
                 @yield('modales')
+                <div class="modal fade" id="newCita" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="title" id="defaultModalLabel">Crear Cita</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('cita.store') }}" method="post" autocomplete="off"
+                                    accept-charset="UTF-8" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <p> <b>Servicio: </b> </p>
+                                            <select name="idServicio" id="idServicio" required onchange="getMedicos()"
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                                @foreach ($servicios as $servicio)
+                                                    <option value="{{ $servicio->id }}">{{ $servicio->servicio }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <p> <b>Medico: </b> </p>
+                                            <select name="idMedico" id="idMedico" disabled required
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                                @foreach ($medicos as $medico)
+                                                    <option value="{{ $medico->id }}">{{ $medico->name }}
+                                                        {{ $medico->last_name }}</option>
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-125 col-md-125 col-sm-12">
+                                            <p> <b>Paciente: </b> </p>
+                                            <select name="idPaciente" id="idPaciente" disabled required
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                                @foreach ($pacientes as $medico)
+                                                    <option value="{{ $medico->id }}">{{ $medico->name }}
+                                                        {{ $medico->last_name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <p> <b>Fecha: </b> </p>
+                                            <input type="date" onchange="buscarHorarios()" required
+                                                class="form-control" name="fecha" id="fecha">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <p> <b>Horario: </b> </p>
+                                            <select name="idHorario" id="idHorario" required
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <p> <b>Observaciones: </b> </p>
+                                            <textarea rows="4" name="observaciones" required class="form-control no-resize"></textarea>
+                                        </div>
+                                    </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger waves-effect"
+                                    data-dismiss="modal">CERRAR</button>
+                                <button type="submit" class="btn btn-success btn-round waves-effect">GUARDAR</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     @yield('contenidos')
                 </div>
@@ -182,10 +274,10 @@
     {{-- Axios --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="{{asset('assets/vendor/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
 
     <!-- Jquery Validation -->
-    <script src="{{asset('assets/vendor/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
 
     @yield('scripts')
 </body>

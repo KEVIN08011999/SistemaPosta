@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Citas, Diagnostico, User};
+use App\Models\{Citas, Diagnostico, User, Servicios};
 use Illuminate\Http\Request;
 
 class DiagnosticoController extends Controller
@@ -10,8 +10,10 @@ class DiagnosticoController extends Controller
     public function index()
     {
         $diagnosticos = Diagnostico::where('estado', 1)->with(['cita', 'cita.medico', 'cita.paciente', 'cita.servicio', 'triaje'])->get();
-
-        return view('diagnosticos.list', compact('diagnosticos'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('diagnosticos.list', compact('diagnosticos','servicios', 'pacientes', 'medicos'));
     }
 
 

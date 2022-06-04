@@ -1,9 +1,9 @@
  <div class="deznav">
      <div class="deznav-scroll">
-         <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#addOrderModalside">+ New
+         <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#newCita">+ New
              Cita</a>
          <ul class="metismenu" id="menu">
-             <li><a href="{{route('indexs')}}" class="ai-icon" aria-expanded="false">
+             <li><a href="{{route('index')}}" class="ai-icon" aria-expanded="false">
                      <i class="flaticon-381-home"></i>
                      <span class="nav-text">Inicio</span>
                  </a>

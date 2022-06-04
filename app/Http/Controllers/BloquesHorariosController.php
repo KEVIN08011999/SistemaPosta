@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BloquesHorarios;
+use App\Models\{BloquesHorarios, User, Servicios};
 use Illuminate\Http\Request;
 
 class BloquesHorariosController extends Controller
@@ -10,7 +10,10 @@ class BloquesHorariosController extends Controller
     public function index()
     {
         $horarios = BloquesHorarios::all();
-        return view('config.horarios', compact('horarios'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('config.horarios', compact('horarios','servicios', 'pacientes', 'medicos'));
     }
 
     public function store(Request $request)

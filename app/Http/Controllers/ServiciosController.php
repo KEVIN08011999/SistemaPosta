@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Servicios;
+use App\Models\{Servicios, User};
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
@@ -11,7 +11,10 @@ class ServiciosController extends Controller
     public function index()
     {
         $servicios = Servicios::all();
-        return view('config.servicio', compact('servicios'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('config.servicio', compact('servicios','servicios', 'pacientes', 'medicos'));
     }
 
 

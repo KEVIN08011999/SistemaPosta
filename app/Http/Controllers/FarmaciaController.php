@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Medicamentos, Ventas, User};
+use App\Models\{Medicamentos, Ventas, User, Servicios};
 use Illuminate\Http\Request;
 
 class FarmaciaController extends Controller
@@ -13,6 +13,8 @@ class FarmaciaController extends Controller
         $medicamentos = Medicamentos::all();
         $venta = new Ventas();
         $venta->save();
-        return view('farmacias.pos', compact('medicamentos', 'pacientes', 'venta'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        return view('farmacias.pos', compact('medicamentos', 'pacientes', 'venta','servicios', 'pacientes', 'medicos'));
     }
 }

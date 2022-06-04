@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Medicamentos};
+use App\Models\{Medicamentos, Servicios, User};
 use Illuminate\Http\Request;
 
 class MedicamentosController extends Controller
@@ -10,7 +10,10 @@ class MedicamentosController extends Controller
     public function index()
     {
         $medicamentos = Medicamentos::all();
-        return view('farmacias.medicamentos', compact('medicamentos'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('farmacias.medicamentos', compact('medicamentos','servicios', 'pacientes', 'medicos'));
     }
 
 

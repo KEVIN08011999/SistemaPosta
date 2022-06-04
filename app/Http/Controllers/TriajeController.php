@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Citas, Diagnostico, Triaje};
+use App\Models\{Citas, Diagnostico, Triaje, Servicios, User};
 use Illuminate\Http\Request;
 
 class TriajeController extends Controller
@@ -10,7 +10,10 @@ class TriajeController extends Controller
     public function index()
     {
         $citas = Citas::whereEstado(1)->whereFecha(date('Y-m-d'))->with(['medico', 'paciente', 'horario', 'servicio'])->get();
-        return view('triajes.list', compact('citas'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('triajes.list', compact('citas','servicios', 'pacientes', 'medicos'));
     }
 
     public function store(Request $request)

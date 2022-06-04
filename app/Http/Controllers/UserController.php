@@ -31,7 +31,9 @@ class UserController extends Controller
         $usuarios = User::whereRolId(1)->get();
         $tipo = "Administradores";
         $servicios = Servicios::all();
-        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('usuarios', compact('usuarios', 'tipo', 'servicios', 'pacientes', 'medicos'));
     }
 
     public function medicos()
@@ -39,7 +41,9 @@ class UserController extends Controller
         $usuarios = User::whereRolId(2)->with('servicio')->get();
         $tipo = "Medicos";
         $servicios = Servicios::all();
-        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 
     public function farmaceutas()
@@ -47,7 +51,9 @@ class UserController extends Controller
         $usuarios = User::whereRolId(3)->get();
         $tipo = "Farmaceutas";
         $servicios = Servicios::all();
-        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 
     public function pacientes()
@@ -55,7 +61,9 @@ class UserController extends Controller
         $usuarios = User::whereRolId(4)->get();
         $tipo = "Pacientes";
         $servicios = Servicios::all();
-        return view('usuarios', compact('usuarios', 'tipo', 'servicios'));
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 
     public function store(Request $request)
@@ -127,8 +135,10 @@ class UserController extends Controller
     public function listadoRecetas()
     {
         $usuarios = User::whereRolId(4)->with(['citas_data', 'citas_data.diagnostico', 'citas_data.diagnostico.recetas'])->get();
-
-        return view('farmacias.list', compact('usuarios'));
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        return view('farmacias.list', compact('usuarios','servicios', 'pacientes', 'medicos'));
     }
 
     function upload_global($file, $folder)

@@ -73,6 +73,12 @@
                         </thead>
                         <tbody id="data_factura">
                         </tbody>
+
+                        <tfoot>
+                            <tr>
+                    <td colspan="4" style="text-align: center; font-size: 20px" id="total">S/ 0 </td>
+                </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -111,6 +117,7 @@
 
             axios.post('/api/agregarproducto/', frmData).then((response) => {
                 $("#data_factura").html(response.data.html)
+                $("#total").val(response.data.total)
             })
         }
 

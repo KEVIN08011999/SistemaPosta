@@ -11,7 +11,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="">Paciente</label>
-                            <select name="idPaciente" class="form-control" id="idPaciente">
+                            <select name="idPaciente" class="form-control" id="idPaciente2">
                                 <option value="">-- SELECCIONE --</option>
                                 @foreach ($pacientes as $paciente)
                                     <option value="{{ $paciente->id }}">{{ $paciente->name }}
@@ -175,7 +175,7 @@
         //     "scrollCollapse": true,
         //     "paging": false
         // });
-        $("#idPaciente").select2();
+        $("#idPaciente2").select2();
         $("#idProducto").select2();
     </script>
 @endsection

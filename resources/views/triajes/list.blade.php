@@ -103,24 +103,24 @@
                         <div class="row clearfix">
                             <div class="col-md-4">
                                 <p> <b>Presion Arterial: </b> </p>
-                                <input type="text" class="form-control" name="presion">
+                                <input type="text" required class="form-control" name="presion">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Temperatura: </b> </p>
-                                <input type="text" class="form-control" name="temperatura">
+                                <input type="text" required class="form-control" name="temperatura">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Frecuencia Cardiaca: </b> </p>
-                                <input type="text" class="form-control" name="cardiaca">
+                                <input type="text" required class="form-control" name="cardiaca">
                             </div>
                         </div>
 
                         <div class="row clearfix">
                             <div class="col-md-4">
                                 <p> <b>Saturacion: </b> </p>
-                                <input type="text" class="form-control" name="saturacion">
+                                <input type="text" required class="form-control" name="saturacion">
                             </div>
 
 
@@ -129,12 +129,12 @@
                         <div class="row clearfix">
                             <div class="col-md-6">
                                 <p> <b>Peso Kg: </b> </p>
-                                <input type="text" class="form-control" name="peso">
+                                <input type="text" required class="form-control" name="peso">
                             </div>
 
                             <div class="col-md-6">
                                 <p> <b>Talla CM: </b> </p>
-                                <input type="text" class="form-control" name="talla">
+                                <input type="text" required class="form-control" name="talla">
                             </div>
                         </div>
 

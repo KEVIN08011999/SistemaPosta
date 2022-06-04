@@ -137,14 +137,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Nombre</label>
-                                    <input type="text" name="nombre" id="nombreEdit" class="form-control" placeholder="">
+                                    <input type="text" name="nombre" required id="nombreEdit" class="form-control" placeholder="">
                                     <input type="hidden" name="idMedicamento" id="idEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Cantidad Empaque</label>
-                                    <input type="text" name="cantidad_unidades_empaque" id="cantidadEdit" class="form-control" placeholder="">
+                                    <input type="text" name="cantidad_unidades_empaque" required id="cantidadEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Stock Empaques</label>
-                                    <input type="text" name="stock_empaque" onblur="calcularCantidad2()" id="empaquesEdit" class="form-control" placeholder="">
+                                    <input type="text" name="stock_empaque" required onblur="calcularCantidad2()" id="empaquesEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -168,13 +168,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Precio Empaques</label>
-                                    <input type="text" name="precio_empaque" id="precioEmpaqueEdit" class="form-control" placeholder="">
+                                    <input type="text" name="precio_empaque" required id="precioEmpaqueEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Precio Unidades</label>
-                                    <input type="text" name="precio_unidad" id="precioUnidadEdit" class="form-control" placeholder="">
+                                    <input type="text" name="precio_unidad" required id="precioUnidadEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Presentacion</label>
-                                    <input type="text" name="presentacion" id="presentacionEdit" class="form-control" placeholder="">
+                                    <input type="text" name="presentacion" required id="presentacionEdit" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>

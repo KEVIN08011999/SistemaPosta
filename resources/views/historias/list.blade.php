@@ -88,34 +88,34 @@
                         <div class="row clearfix">
                             <div class="col-md-4">
                                 <p> <b>Presion Arterial: </b> </p>
-                                <input type="text" class="form-control" disabled name="presion" id="presion">
+                                <input type="text" required class="form-control" disabled name="presion" id="presion">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Temperatura: </b> </p>
-                                <input type="text" class="form-control" disabled name="temperatura" id="temperatura">
+                                <input type="text" required class="form-control" disabled name="temperatura" id="temperatura">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Frecuencia Cardiaca: </b> </p>
-                                <input type="text" class="form-control" disabled name="cardiaca" id="cardiaca">
+                                <input type="text" required class="form-control" disabled name="cardiaca" id="cardiaca">
                             </div>
                         </div>
 
                         <div class="row clearfix">
                             <div class="col-md-4">
                                 <p> <b>Saturacion: </b> </p>
-                                <input type="text" class="form-control" disabled name="saturacion" id="saturacion">
+                                <input type="text" required class="form-control" disabled name="saturacion" id="saturacion">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Peso Kg: </b> </p>
-                                <input type="text" class="form-control" disabled name="peso" id="peso">
+                                <input type="text" required class="form-control" disabled name="peso" id="peso">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Talla CM: </b> </p>
-                                <input type="text" class="form-control" disabled name="talla" id="talla">
+                                <input type="text" required class="form-control" disabled name="talla" id="talla">
                             </div>
 
                         </div>
@@ -125,12 +125,12 @@
                         <div class="row clearfix">
                             <div class="col-md-8">
                                 <p> <b>Motivo de Visita: </b> </p>
-                                <textarea name="motivo" id="motivo" disabled class="form-control" rows="7"></textarea>
+                                <textarea name="motivo" required id="motivo" disabled class="form-control" rows="7"></textarea>
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>VACUNAS COMPLETAS: </b> </p>
-                                <select name="vacunas" id="vacunas" disabled class="form-control" id="">
+                                <select name="vacunas" required id="vacunas" disabled class="form-control" id="">
                                     <option value="">-- SELECCIONE --</option>
                                     <option value="1">SI</option>
                                     <option value="2">NO</option>

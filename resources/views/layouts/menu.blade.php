@@ -66,7 +66,7 @@
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('farmacia.index') }}">Buscar Receta</a></li>
-                     <li><a href="{{ route('farmacia.vender') }}">Vender</a></li>
+                     <li><a href="{{ route('farmacia.venta') }}">Vender</a></li>
                      <li><a href="{{ route('triaje.index') }}">Ventas</a></li>
                      <li><a href="{{ route('farmacia.medicamentos') }}">Medicamentos</a></li>
                  </ul>

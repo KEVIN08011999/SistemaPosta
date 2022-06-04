@@ -68,7 +68,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p> <b>Servicio: </b> </p>
-                                <select name="idServicio" id="idServicio" onchange="getMedicos()" class="form-control show-tick">
+                                <select name="idServicio" id="idServicio" required onchange="getMedicos()" class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($servicios as $servicio)
                                         <option value="{{$servicio->id}}">{{$servicio->servicio}}</option>
@@ -81,7 +81,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p> <b>Medico: </b> </p>
-                                <select name="idMedico" id="idMedico" disabled  class="form-control show-tick">
+                                <select name="idMedico" id="idMedico" disabled required  class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($medicos as $medico)
                                         <option value="{{$medico->id}}">{{$medico->name}} {{$medico->last_name}}</option>
@@ -95,7 +95,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-125 col-md-125 col-sm-12">
                                 <p> <b>Paciente: </b> </p>
-                                <select name="idPaciente" id="idPaciente" disabled class="form-control show-tick">
+                                <select name="idPaciente" id="idPaciente" disabled required class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                     @foreach ($pacientes as $medico)
                                         <option value="{{$medico->id}}">{{$medico->name}} {{$medico->last_name}}</option>
@@ -108,13 +108,13 @@
                         <div class="row clearfix">
                             <div class="col-md-6">
                                 <p> <b>Fecha: </b> </p>
-                                <input type="date" onchange="buscarHorarios()" class="form-control" name="fecha"
+                                <input type="date" onchange="buscarHorarios()" required class="form-control" name="fecha"
                                     id="fecha">
                             </div>
 
                             <div class="col-md-6">
                                 <p> <b>Horario: </b> </p>
-                                <select name="idHorario" id="idHorario" class="form-control show-tick">
+                                <select name="idHorario" id="idHorario" required class="form-control show-tick">
                                     <option value="">-- SELECCIONE --</option>
                                 </select>
                             </div>
@@ -123,7 +123,7 @@
                         <div class="row clearfix">
                             <div class="col-md-12">
                                 <p> <b>Observaciones: </b> </p>
-                                <textarea rows="4" name="observaciones" class="form-control no-resize"></textarea>
+                                <textarea rows="4" name="observaciones" required class="form-control no-resize"></textarea>
                             </div>
                         </div>
 

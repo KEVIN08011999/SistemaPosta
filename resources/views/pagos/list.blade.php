@@ -80,19 +80,19 @@
                         <div class="row clearfix">
                             <div class="col-md-4">
                                 <p> <b>Precio: </b> </p>
-                                <input type="text" class="form-control" name="precio" id="precio">
+                                <input type="text" class="form-control" required name="precio" id="precio">
                                 <input type="hidden" class="form-control" name="idPago" id="idPago">
                                 <input type="hidden" class="form-control" name="idPaciente" id="idPaciente">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Observacion: </b> </p>
-                                <input type="text" class="form-control" name="observacion" id="observacion">
+                                <input type="text" class="form-control" required name="observacion" id="observacion">
                             </div>
 
                             <div class="col-md-4">
                                 <p> <b>Metodo de pago: </b> </p>
-                                <select name="metodo_pago" class="form-control" id="">
+                                <select name="metodo_pago" required class="form-control" id="">
                                     <option value="">-- SELECCIONE --</option>
                                     <option value="1">Visa/Mastercard</option>
                                     <option value="2">Yape/Plin</option>

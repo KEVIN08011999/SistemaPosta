@@ -77,14 +77,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Documento</label>
-                                    <input type="text" name="document" onblur="validarDocumento()" id="document"
+                                    <input type="text" name="document" required onblur="validarDocumento()" id="document"
                                         class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Foto</label>
-                                    <input type="file" name="photo" class="form-control" id="">
+                                    <input type="file" name="photo"  class="form-control" id="">
                                 </div>
                             </div>
                         </div>
@@ -93,13 +93,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Nombre</label>
-                                    <input type="text" name="name" class="form-control" placeholder="">
+                                    <input type="text" name="name" required class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Apellido</label>
-                                    <input type="text" name="last_name" class="form-control" placeholder="">
+                                    <input type="text" name="last_name" required class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -108,13 +108,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Correo</label>
-                                    <input type="text" name="email" class="form-control" placeholder="">
+                                    <input type="text" name="email" required class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Telefono</label>
-                                    <input type="text" name="telefono" class="form-control" placeholder="">
+                                    <input type="text" name="telefono" required class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -123,13 +123,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Usuario</label>
-                                    <input type="text" name="user" class="form-control" placeholder="">
+                                    <input type="text" name="user" required class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Clave</label>
-                                    <input type="text" name="password" class="form-control" placeholder="">
+                                    <input type="text" name="password" required class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Tipo Usuario</label>
-                                    <select class="form-control show-tick" onchange="mostrar()" name="rol_id" id="rolid">
+                                    <select class="form-control show-tick" required onchange="mostrar()" name="rol_id" id="rolid">
                                         <option value="">-- Seleccione --</option>
                                         <option value="1">Administrador</option>
                                         <option value="2">Medico</option>
@@ -150,7 +150,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Especialidad</label>
-                                    <select class="form-control show-tick" name="idServicio" id="idServicio" disabled>
+                                    <select class="form-control show-tick" required name="idServicio" id="idServicio" disabled>
                                         <option value="">-- Seleccione --</option>
                                         @foreach ($servicios as $servicio)
                                             <option value="{{ $servicio->id }}">{{ $servicio->servicio }}</option>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('user')->unique();
             $table->string('password');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('telefono');
             $table->integer('rol_id');
             $table->integer('idServicio')->nullable();

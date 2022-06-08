@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Buscar Pacientes</h4>
+                <h4 class="card-title">Ventas</h4>
             </div>
             <div class="card-body">
 
@@ -21,24 +21,23 @@
                     <table id="example" class="display min-w850">
                         <thead>
                             <tr>
-                                <th>Documento</th>
-                                <th>Nombre Completo</th>
-                                <th>Correo</th>
-                                <th>Usuario</th>
-                                <th></th>
+                                <th>Fecha</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usuarios as $usuario)
+                            @foreach ($ventas as $venta)
                                 <tr>
-                                    <td>{{ $usuario->document }}</td>
-                                    <td>{{ $usuario->name }} {{ $usuario->last_name }}</td>
-
-                                    <td>{{ $usuario->email }}</td>
-                                    <td>{{ $usuario->user }}</td>
+                                    <td>{{ $venta->created_at }}</td>
+                                    @if($venta->cliente != null)
+                                    <td>{{ $venta->cliente->name }} {{ $venta->cliente->last_name }}</td>
+                                    @else
+                                    <td>Sin Cliente</td>
+                                    @endif
                                     <td>
-                                        <a href="#recetas" onclick="verRecetas({{ $usuario }})"
-                                            class="btn btn-success">Recetas</a>
+                                        <a href="{{route('factura', $venta->id)}}" onclick="verRecetas({{ $venta }})"
+                                            class="btn btn-success">Ver Venta</a>
                                     </td>
                                 </tr>
                             @endforeach

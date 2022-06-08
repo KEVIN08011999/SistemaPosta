@@ -23,8 +23,8 @@ class FarmaciaController extends Controller
         $servicios = Servicios::all();
         $medicos = User::whereIdRol(2);
         $pacientes = User::whereRolId(4)->get();
+        $ventas = Ventas::whereEstado(2)->with('cliente')->get();
 
-        return view('farmacias.list', compact('servicios', 'pacientes', 'medicos'));
-
+        return view('farmacias.ventas', compact('servicios', 'pacientes', 'medicos', 'ventas'));
     }
 }

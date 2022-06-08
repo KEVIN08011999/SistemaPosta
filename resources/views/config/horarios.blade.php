@@ -60,13 +60,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Inicio</label>
-                                    <input type="time" name="inicio" class="form-control" placeholder="">
+                                    <input type="time" name="inicio" required class="form-control" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Fin</label>
-                                    <input type="time" name="fin" class="form-control" placeholder="">
+                                    <input type="time" name="fin" required class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>

@@ -208,7 +208,10 @@
             }
 
             axios.post('/api/guardarVenta', data).then((response) => {
-
+                if(response.data == 200)
+                {
+                    window.location.href = "/farmacia/ventas";
+                }
             })
         }
 

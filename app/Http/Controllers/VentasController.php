@@ -2,73 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreVentasRequest;
-use App\Http\Requests\UpdateVentasRequest;
-use App\Models\Ventas;
+use App\Models\{Empresa, Ventas, Servicios, User};
 use Illuminate\Http\Request;
 
 class VentasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function factura($idVenta)
     {
-        //
+        $empresa = Empresa::first();
+        $servicios = Servicios::all();
+        $medicos = User::whereIdRol(2);
+        $pacientes = User::whereIdRol(4);
+        $venta = Ventas::whereId($idVenta)->with('cliente', 'detalle', 'detalle.producto')->first();
+
+
+        return view('farmacias.factura', compact('empresa', 'venta', 'servicios', 'medicos', 'pacientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreVentasRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreVentasRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ventas  $ventas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ventas $ventas)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ventas  $ventas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ventas $ventas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVentasRequest  $request
-     * @param  \App\Models\Ventas  $ventas
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $venta = Ventas::find($request->idVenta);
@@ -79,16 +29,5 @@ class VentasController extends Controller
         $venta->save();
 
         return 200;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ventas  $ventas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ventas $ventas)
-    {
-        //
     }
 }

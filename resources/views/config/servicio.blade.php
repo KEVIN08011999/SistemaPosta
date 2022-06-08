@@ -62,7 +62,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Servicio</label>
-                                    <input type="text" name="servicio" class="form-control" placeholder="">
+                                    <input type="text" name="servicio" required class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
  <div class="deznav">
      <div class="deznav-scroll">
-         <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#newCita">+ New
+         <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#newCita">+ Nueva
              Cita</a>
          @if (Auth::user()->rol_id == 1)
              <ul class="metismenu" id="menu">
@@ -18,7 +18,7 @@
                      </a>
                      <ul aria-expanded="false">
                          <li><a href="{{ route('administradores') }}">Administradores</a></li>
-                         <li><a href="{{ route('medicos') }}">Medicos</a></li>
+                         <li><a href="{{ route('medicos') }}">Médicos</a></li>
                          <li><a href="{{ route('pacientes') }}">Pacientes</a></li>
                          <li><a href="{{ route('farmaceutas') }}">Farmaceutas</a></li>
                      </ul>
@@ -71,7 +71,7 @@
                      <ul aria-expanded="false">
                          <li><a href="{{ route('horarios.index') }}">Bloques Horarios</a></li>
                          <li><a href="{{ route('servicios.index') }}">Servicios</a></li>
-                         <li><a href="{{ route('empresa.index') }}">Informacion Clinica</a></li>
+                         <li><a href="{{ route('empresa.index') }}">Información Posta</a></li>
                      </ul>
                  </li>
              </ul>

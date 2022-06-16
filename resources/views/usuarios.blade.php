@@ -24,7 +24,7 @@
                     <table id="example" class="display min-w850">
                         <thead>
                             <tr>
-                                <th>Documento</th>
+                                <th>DNI</th>
                                 <th>Nombre Completo</th>
                                 @if ($tipo == 'Medicos')
                                     <th>Especialidad</th>

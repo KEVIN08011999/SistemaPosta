@@ -32,8 +32,9 @@ class CitasSeeder extends Seeder
             'nombre' => 'EMPRESA',
             'correo' => 'admin',
             'web' => 'https://pagina.com',
-            'password' => 'text-logo.png',
+            'logo' => 'text-logo.png',
             'telefono' => 00000,
+            'direccion' => "Direeccion"
         ]);
     }
 }

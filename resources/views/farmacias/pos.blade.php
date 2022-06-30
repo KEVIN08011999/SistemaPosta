@@ -12,7 +12,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="">Paciente</label>
-                            <select name="idPaciente" onchange="mostrar()" required class="form-control" id="idPaciente2">
+                            <select name="idPaciente" onchange="mostrar2()" class="form-control" id="idPaciente28">
                                 <option value="">-- SELECCIONE --</option>
                                 @foreach ($pacientes as $paciente)
                                     <option value="{{ $paciente->id }}">
@@ -85,7 +85,7 @@
                         </tr>
                         <tr>
                             <td colspan="6" style="text-align: right; font-size: 20px" >
-                                <button onclick="cobrar()" class="w-100 btn btn-success">Cobrar</button>
+                                <span onclick="cobrar()" class="w-100 btn btn-success">Cobrar</span>
                             </td>
                         </tr>
                     </tfoot>
@@ -175,7 +175,6 @@
                     $("#data_factura").html(response.data.html)
                     $("#total").html('S/' +response.data.total)
                     this.total = response.data.total
-                    $("#producto")[0].reset();
                 })
             }
             else{
@@ -215,15 +214,18 @@
             $("#vuelto").val(valor)
         }
 
-        function mostrar()
+        function mostrar2()
         {
+
+            console.log($("#idPaciente28").val())
             $("#productos").show()
         }
 
         function guardarVenta()
         {
+            console.log($("#idPaciente28").val())
             const data = {
-                idCliente : $("#idPaciente2").val(),
+                idCliente : $("#idPaciente28").val(),
                 total : this.total,
                 tipo_pago: $("#tipopago").val(),
                 idVenta: $("#idVenta").val()

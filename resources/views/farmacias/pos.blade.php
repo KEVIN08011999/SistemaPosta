@@ -12,10 +12,11 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="">Paciente</label>
-                            <select name="idPaciente" required class="form-control" id="idPaciente2">
+                            <select name="idPaciente" onchange="mostrar()" required class="form-control" id="idPaciente2">
                                 <option value="">-- SELECCIONE --</option>
                                 @foreach ($pacientes as $paciente)
-                                    <option value="{{ $paciente->id }}">{{ $paciente->name }}
+                                    <option value="{{ $paciente->id }}">
+                                        {{ $paciente->name }}
                                         {{ $paciente->last_name }}
                                     </option>
                                 @endforeach
@@ -25,7 +26,7 @@
                 </div>
 
 
-                    <div class="row clearfix">
+                    <div class="row clearfix" style="display: none" id="productos">
                         <div class="col-sm-4">
                             <label for="">Producto</label>
                             <select name="idProducto" id="idProducto" onchange="medicamento()" class="form-control x-100">
@@ -212,6 +213,11 @@
             monto = $("#monto").val()
             valor = monto - this.total
             $("#vuelto").val(valor)
+        }
+
+        function mostrar()
+        {
+            $("#productos").show()
         }
 
         function guardarVenta()

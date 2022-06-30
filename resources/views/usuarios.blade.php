@@ -187,7 +187,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Documento</label>
-                                    <input type="text" name="name" id="idDocumentEdit" disabled class="form-control"
+                                    <input type="text" name="documento" id="idDocumentEdit" class="form-control"
                                         placeholder="">
                                 </div>
                             </div>

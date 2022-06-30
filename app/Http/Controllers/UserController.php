@@ -97,6 +97,7 @@ class UserController extends Controller
                 'id' => $request->idUsuario,
             ],
             [
+                'document' => $request->documento,
                 'name' => $request->name,
                 'last_name' => $request->last_name,
                 'user' => $request->user,

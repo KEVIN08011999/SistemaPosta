@@ -42,13 +42,16 @@ class DiagnosticoController extends Controller
 
     public function historiaclinica($paciente)
     {
+        $servicios = Servicios::all();
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         $paciente = User::find($paciente);
         $citas = Citas::where('idPaciente', $paciente->id)
                         ->with(['medico', 'servicio', 'diagnostico', 'diagnostico.triaje', 'paciente'])
                         ->orderBy('id', 'desc')
                         ->get();
 
-        return view('historias.list', compact('paciente', 'citas'));
+        return view('historias.list', compact('paciente', 'citas', 'servicios', 'medicos', 'pacientes'));
     }
 
 

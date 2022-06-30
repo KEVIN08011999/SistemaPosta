@@ -6,12 +6,13 @@
             <div class="card-header">
                 <h4 class="card-title">Vender</h4>
             </div>
+            <form action="" id="producto">
             <div class="card-body">
                 <div class="row clearfix">
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="">Paciente</label>
-                            <select name="idPaciente" class="form-control" id="idPaciente2">
+                            <select name="idPaciente" required class="form-control" id="idPaciente2">
                                 <option value="">-- SELECCIONE --</option>
                                 @foreach ($pacientes as $paciente)
                                     <option value="{{ $paciente->id }}">{{ $paciente->name }}
@@ -23,12 +24,12 @@
                     </div>
                 </div>
 
-                <form action="" id="producto">
+
                     <div class="row clearfix">
                         <div class="col-sm-4">
                             <label for="">Producto</label>
                             <select name="idProducto" id="idProducto" onchange="medicamento()" class="form-control x-100">
-                                <option value="">-- SELECCIONE --</option>
+                                <option value="0">-- SELECCIONE --</option>
                                 @foreach ($medicamentos as $producto)
                                     <option value="{{ $producto->id }}">{{ $producto->nombre }}
                                         ({{ $producto->presentacion }})
@@ -167,20 +168,35 @@
             var frmData = $("#producto").serialize();
 
             console.log(frmData)
+                if($("#idPaciente") != 0){
+                    axios.post('/api/agregarproducto/', frmData).then((response) => {
+                    console.log(response.data)
+                    $("#data_factura").html(response.data.html)
+                    $("#total").html('S/' +response.data.total)
+                    this.total = response.data.total
+                    $("#producto")[0].reset();
+                })
+            }
+            else{
+                alert("Debe Agregar un paciente y/o cliente antes de poder agregar productos!")
+            }
 
-            axios.post('/api/agregarproducto/', frmData).then((response) => {
-                console.log(response.data)
-                $("#data_factura").html(response.data.html)
-                $("#total").html('S/' +response.data.total)
-                this.total = response.data.total
-                $("#producto")[0].reset();
-            })
         }
 
         function cobrar()
         {
             $("#defaultModal").modal('show')
             $("#totalmdal").val('S/' +this.total)
+        }
+
+        function eliminar(idVenta)
+        {
+            axios.get('/api/eliminarVenta/'+idVenta+'/'+$("#idVenta").val()).then((response) => {
+                $("#data_factura").html(response.data.html)
+                $("#total").html('S/' +response.data.total)
+                this.total = response.data.total
+                $("#producto")[0].reset();
+            })
         }
 
         function mostrar()
@@ -215,17 +231,6 @@
             })
         }
 
-
-
-        // var table2 = $('#example').DataTable({
-        //     createdRow: function(row, data, index) {
-        //         $(row).addClass('selected')
-        //     },
-
-        //     "scrollY": "42vh",
-        //     "scrollCollapse": true,
-        //     "paging": false
-        // });
         $("#idPaciente2").select2();
         $("#idProducto").select2();
     </script>

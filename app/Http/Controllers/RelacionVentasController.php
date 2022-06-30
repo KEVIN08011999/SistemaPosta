@@ -6,36 +6,12 @@ use App\Http\Requests\StoreRelacionVentasRequest;
 use App\Http\Requests\UpdateRelacionVentasRequest;
 use App\Models\Medicamentos;
 use App\Models\RelacionVentas;
+use App\Models\Ventas;
 use Illuminate\Http\Request;
 
 class RelacionVentasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRelacionVentasRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $producto = Medicamentos::find($request->idProducto);
@@ -44,6 +20,11 @@ class RelacionVentasController extends Controller
         } else {
             $total = $request->cantidad * $producto->precio_unidad;
         }
+
+        $v = Ventas::find($request->idVenta);
+        $v->idCliente = $request->idPaciente;
+        $v->save();
+
         $venta = RelacionVentas::updateOrCreate(
             [
                 'idVenta' => $request->idVenta,
@@ -76,7 +57,43 @@ class RelacionVentasController extends Controller
             }
             $html .= "<td>$venta->cantidad</td>";
             $html .= "<td>".$venta->total."</td>";
-            $html .= "<td><i class='fa fa-trash text-danger'></i></td>";
+            $html .= "<td><i onclick='eliminar(".$venta->id.")' class='fa fa-trash text-danger'></i></td>";
+            $html .= "</tr>";
+            $total = $total + $venta->total;
+        }
+
+        return response()->json([
+            'html' => $html,
+            'total' => $total
+        ]);
+    }
+
+
+    public function eliminar($idRelacion, $idVenta)
+    {
+
+        $venta = RelacionVentas::find($idRelacion);
+        $venta->delete();
+
+        $ventas = RelacionVentas::where('idVenta', $idVenta)->with('producto')->get();
+
+        $html = "";
+        $total = 0;
+
+        foreach ($ventas as $venta) {
+            $html .= "<tr>";
+            $html .= "<td>" . $venta->producto->nombre . "(" . $venta->producto->presentacion . ")</td>";
+            if ($venta->tipo == 1) {
+                $html .= "<td>Pqt</td>";
+                $html .= "<td>" . $venta->producto->precio_empaque . "</td>";
+            }
+            if ($venta->tipo == 2) {
+                $html .= "<td>Und</td>";
+                $html .= "<td>" . $venta->producto->precio_unidad . "</td>";
+            }
+            $html .= "<td>$venta->cantidad</td>";
+            $html .= "<td>" . $venta->total . "</td>";
+            $html .= "<td><i onclick='eliminar(" . $venta->id . ")' class='fa fa-trash text-danger'></i></td>";
             $html .= "</tr>";
             $total = $total + $venta->total;
         }

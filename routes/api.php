@@ -14,4 +14,5 @@ Route::post('receta', [RecetasController::class, 'store']);
 Route::get('receta/{diagnostico}', [RecetasController::class, 'index']);
 Route::get('medicamento/{medicamento}', [MedicamentosController::class, 'get']);
 Route::post('agregarproducto', [RelacionVentasController::class, 'store']);
+Route::get('eliminarVenta/{idRelacion}/{idVenta}', [RelacionVentasController::class, 'eliminar']);
 Route::post('guardarVenta', [VentasController::class, 'update']);

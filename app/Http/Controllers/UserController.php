@@ -68,6 +68,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        if($request->file != null){
+            $foto = $this->upload_global($request->file('photo'), 'perfiles');
+        }
+        else{
+            $foto = null;
+        }
         $user = User::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
@@ -75,7 +81,7 @@ class UserController extends Controller
             'rol_id' => $request->rol_id,
             'password' => 'a1Bz20ydqelm8m1wql' . md5($request->password),
             'email' => $request->email,
-            'photo' => $this->upload_global($request->file('photo'), 'perfiles'),
+            'photo' => $foto,
             'telefono' => $request->telefono,
             'idServicio' => $request->idServicio,
             'document' => $request->document

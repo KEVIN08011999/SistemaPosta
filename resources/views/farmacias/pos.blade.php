@@ -8,6 +8,20 @@
             </div>
             <form action="" id="producto">
             <div class="card-body">
+
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="">Tipo de Paciente</label>
+                            <select name="tipoPaciente" class="form-control" id="tipoPaciente">
+                                <option value="1">-- NORMAL --</option>
+                                <option value="2">-- SIS --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="row clearfix">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -45,7 +59,7 @@
                                 <option value="1"> PQT </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <label for="">Precio</label>
                             <input type="text" disabled id="precio" class="form-control">
                             <input type="hidden" value="{{ $venta->id }}" name="idVenta" id="idVenta"
@@ -54,6 +68,10 @@
                         <div class="col-md-2">
                             <label for="">Cantidad</label>
                             <input type="text" name="cantidad" id="precio" class="form-control">
+                        </div>
+                        <div class="col-md-1">
+                            <label for="">Exonerado</label>
+                            <input type="checkbox" value="1" name="exonerado" id="exonerado">
                         </div>
                 </form>
                 <div class="col-md-2">
@@ -239,7 +257,7 @@
             })
         }
 
-        $("#idPaciente2").select2();
+        $("#idPaciente28").select2();
         $("#idProducto").select2();
     </script>
 @endsection

@@ -32,6 +32,7 @@
                      </a>
                      <ul aria-expanded="false">
                          <li><a href="{{ route('citas') }}">Citas</a></li>
+                         <li><a href="{{ route('citas-sis') }}">Citas SIS</a></li>
                          <li><a href="{{ route('triaje.index') }}">Triaje</a></li>
                          <li><a href="{{ route('diagnostico.index') }}">Diagnostico</a></li>
                      </ul>

@@ -21,9 +21,15 @@ class RelacionVentasController extends Controller
             $total = $request->cantidad * $producto->precio_unidad;
         }
 
+        if(isset($request->exonerado)){
+            $total = 0;
+        }
+
         $v = Ventas::find($request->idVenta);
         $v->idCliente = $request->idPaciente;
+        $v->tipo_paciente = $request->tipoPaciente;
         $v->save();
+
 
         $venta = RelacionVentas::updateOrCreate(
             [
@@ -35,7 +41,8 @@ class RelacionVentasController extends Controller
                 'idProducto' => $request->idProducto,
                 'cantidad' => $request->cantidad,
                 'total' => $total,
-                'tipo'  => $request->tipo
+                'tipo'  => $request->tipo,
+                'exonerado' => $request->exonerado
             ]
         );
 

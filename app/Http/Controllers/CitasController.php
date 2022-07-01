@@ -18,6 +18,17 @@ class CitasController extends Controller
         return view('citas', compact('citas', 'medicos', 'pacientes', 'horarios', 'servicios'));
     }
 
+    public function citasSis()
+    {
+        $citas = Citas::where('sis', 1)->with(['medico', 'paciente', 'horario', 'servicio'])->get();
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
+        $horarios = BloquesHorarios::all();
+        $servicios = Servicios::all();
+
+        return view('citas', compact('citas', 'medicos', 'pacientes', 'horarios', 'servicios'));
+    }
+
     public function store(Request $request)
     {
         $validacion = Citas::where('idMedico', $request->idMedico)

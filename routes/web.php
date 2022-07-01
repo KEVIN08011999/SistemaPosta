@@ -35,6 +35,7 @@ Route::group(['prefix' => 'usuarios'], function() {
 
 Route::group(['prefix' => 'citas'], function () {
     Route::get('/', [CitasController::class, 'index'])->name('citas');
+    Route::get('/citas-sis', [CitasController::class, 'citasSis'])->name('citas-sis');
     Route::post('store', [CitasController::class, 'store'])->name('cita.store');
     Route::post('update', [CitasController::class, 'update'])->name('cita.update');
 });

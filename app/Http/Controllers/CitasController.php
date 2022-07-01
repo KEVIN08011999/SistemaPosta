@@ -9,7 +9,7 @@ class CitasController extends Controller
 {
     public function index()
     {
-        $citas = Citas::with(['medico', 'paciente', 'horario', 'servicio'])->get();
+        $citas = Citas::where('sis', 0)->with(['medico', 'paciente', 'horario', 'servicio'])->get();
 
         $medicos = User::whereRolId(2)->get();
         $pacientes = User::whereRolId(4)->get();
@@ -31,6 +31,7 @@ class CitasController extends Controller
 
     public function store(Request $request)
     {
+
         $validacion = Citas::where('idMedico', $request->idMedico)
             ->where('idPaciente', $request->idPaciente)
             ->where('fecha', $request->fecha)
@@ -41,6 +42,13 @@ class CitasController extends Controller
 
         if ($validacion == 0)
         {
+
+            if ($request->tipoCita == 1) {
+                $foto = $this->upload_global($request->file('archivo'), 'archivos');
+            } else {
+                $foto = null;
+            }
+
             $cita = Citas::create([
                 'idMedico' => $request->idMedico,
                 'idPaciente' => $request->idPaciente,
@@ -48,10 +56,14 @@ class CitasController extends Controller
                 'idHorario' => $request->idHorario,
                 'observaciones' => $request->observaciones,
                 'idServicio' => $request->idServicio,
-                'estado' => 1
+                'estado' => 1,
+                'sis' => $request->tipoCita,
+                'prioridad' => $request->prioridad,
+                'archivo' => $foto
             ]);
 
-            $pago = PagosPaciente::create([
+            if($request->tipoCita == 0){
+                $pago = PagosPaciente::create([
                 'idPaciente' => $request->idPaciente,
                 'idServicio' => $request->idServicio,
                 'precio' => 0,
@@ -60,6 +72,8 @@ class CitasController extends Controller
                 'fecha_generacion' => $request->fecha,
                 'estado' => 1
             ]);
+            }
+
 
             return back()->with('success', 'Cita Creada correctamente');
         }
@@ -121,5 +135,21 @@ class CitasController extends Controller
        }
 
        return $html;
+    }
+
+
+    function upload_global($file, $folder)
+    {
+
+        $file_type = $file->getClientOriginalExtension();
+        $folder = $folder;
+        $destinationPath = public_path() . '/uploads/' . $folder;
+        $destinationPathThumb = public_path() . '/uploads/' . $folder . 'thumb';
+        $filename = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $url = '/uploads/' . $folder . '/' . $filename;
+
+        if ($file->move($destinationPath . '/', $filename)) {
+            return $filename;
+        }
     }
 }

@@ -20,8 +20,9 @@
                         <thead>
                             <tr>
                                 <th></th>
+                                <th></th>
+                                <th>Urgencia</th>
                                 <th>Especialidad</th>
-                                <th>Medico</th>
                                 <th>Paciente</th>
                                 <th>Documento</th>
                                 <th>Fecha</th>
@@ -36,8 +37,20 @@
                                         <i class="fa fa-edit text-success"
                                             onclick="triaje({{ $cita }})"></i>
                                     </td>
+                                    <td>
+                                        @if($cita->archivo != null)
+                                            <a href="/uploads/archivos/{{$cita->archivo}}" target="__blank">
+                                            <i class="fa fa-file btn btn-danger text-white"></i></a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($cita->prioridad == 1)
+                                            <button class="btn btn-danger">Urgente</button>
+                                        @else
+                                            <button class="btn btn-info">Normal</button>
+                                        @endif
+                                    </td>
                                     <td>{{ $cita->servicio->servicio }}</td>
-                                    <td>{{ $cita->medico->name }} {{ $cita->medico->last_name }}</td>
                                     <td>{{ $cita->paciente->name }} {{ $cita->paciente->last_name }}</td>
                                     <td>{{ $cita->paciente->document }}</td>
                                     <td>{{ $cita->fecha }}</td>

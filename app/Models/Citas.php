@@ -16,7 +16,10 @@ class Citas extends Model
         'idHorario',
         'observaciones',
         'idServicio',
-        'estado'
+        'estado',
+        'sis',
+        'prioridad',
+        'archivo'
     ];
 
     public function medico()

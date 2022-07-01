@@ -162,6 +162,40 @@
                                     @csrf
                                     <div class="row clearfix">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <p> <b>Tipo de Cita: </b> </p>
+                                            <select name="tipoCita" onchange="archivosis()" required id="tipoCita"
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                                <option value="0">-- NORMAL --</option>
+                                                <option value="1">-- SIS --</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <p> <b>Archivo de referencia: </b> </p>
+                                            <input type="file" name="archivo" disabled class="form-control" id="archivoRefrencia">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <p> <b>Nivel de Prioridad: </b> </p>
+                                            <select name="prioridad" required
+                                                class="form-control show-tick">
+                                                <option value="">-- SELECCIONE --</option>
+                                                <option value="0">-- NORMAL --</option>
+                                                <option value="1">-- URGENTE --</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
                                             <p> <b>Servicio: </b> </p>
                                             <select name="idServicio" id="idServicio" required onchange="getMedicos()"
                                                 class="form-control show-tick">
@@ -278,6 +312,16 @@
 
     <!-- Jquery Validation -->
     <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+
+    <script>
+       function archivosis(){
+        if ($("#tipoCita").val() == 1) {
+                $("#archivoRefrencia").attr('disabled', false)
+            } else {
+                $("#archivoRefrencia").attr('disabled', true)
+            }
+        }
+    </script>
 
     @yield('scripts')
 </body>

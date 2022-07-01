@@ -1,7 +1,9 @@
  <div class="deznav">
      <div class="deznav-scroll">
+        @if(Auth::user()->rol_id != 3)
          <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#newCita">+ Nueva
              Cita</a>
+             @endif
          @if (Auth::user()->rol_id == 1)
              <ul class="metismenu" id="menu">
                  <li><a href="{{ route('index') }}" class="ai-icon" aria-expanded="false">
@@ -110,6 +112,19 @@
              </ul>
 
          @elseif(Auth::user()->rol_id == 3)
+             <ul class="metismenu" id="menu">
+         <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                         <i class="flaticon-381-bookmark-1"></i>
+
+                         <span class="nav-text">Farmacia</span>
+                     </a>
+                     <ul aria-expanded="false">
+                         <li><a href="{{ route('farmacia.index') }}">Buscar Receta</a></li>
+                         <li><a href="{{ route('farmacia.venta') }}">Vender</a></li>
+                         <li><a href="{{ route('farmacia.ventas') }}">Ventas</a></li>
+                     </ul>
+                 </li>
+             </ul>
 
          @elseif(Auth::user()->rol_id == 4)
          <ul class="metismenu" id="menu">

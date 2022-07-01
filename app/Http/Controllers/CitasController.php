@@ -82,8 +82,6 @@ class CitasController extends Controller
             $validacion = Citas::where('idMedico', $request->idMedico)
             ->where('idPaciente', $request->idPaciente)
             ->where('fecha', $request->fecha)
-            ->where('inicio', '>=', $request->inicio)
-            ->where('fin', '<=', $request->fin)
             ->first();
 
             return back()->with('danger', "Ya el doctor: ". $medico->name ." ". $medico->last_name .", tiene una cita,

@@ -163,25 +163,7 @@
                 }
         });
 
-        $("#idMedico").select2();
-        $("#idPaciente").select2();
-        $("#idServicio").select2();
 
-        function buscarHorarios() {
-            axios.get('/api/getHorariosOcupados/' + $("#idMedico").val() + '/' + $("#fecha").val()).then((response) => {
-                $("#idHorario").html(response.data)
-                console.log(response.data)
-            })
-        }
-
-        function getMedicos()
-        {
-            axios.get('/api/getMedicosByServcicio/'+$("#idServicio").val()).then((response) => {
-                $("#idMedico").html(response.data)
-                $("#idMedico").attr('disabled', false)
-                $("#idPaciente").attr('disabled', false)
-            })
-        }
 
 
         function getMedicosEdit()

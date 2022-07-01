@@ -11,8 +11,8 @@ class TriajeController extends Controller
     {
         $citas = Citas::whereEstado(1)->whereFecha(date('Y-m-d'))->with(['medico', 'paciente', 'horario', 'servicio'])->get();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('triajes.list', compact('citas','servicios', 'pacientes', 'medicos'));
     }
 

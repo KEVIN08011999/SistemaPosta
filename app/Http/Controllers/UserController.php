@@ -31,8 +31,8 @@ class UserController extends Controller
         $usuarios = User::whereRolId(1)->get();
         $tipo = "Administradores";
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('usuarios', compact('usuarios', 'tipo', 'servicios', 'pacientes', 'medicos'));
     }
 
@@ -41,8 +41,8 @@ class UserController extends Controller
         $usuarios = User::whereRolId(2)->with('servicio')->get();
         $tipo = "Medicos";
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 
@@ -51,8 +51,8 @@ class UserController extends Controller
         $usuarios = User::whereRolId(3)->get();
         $tipo = "Farmaceutas";
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 
@@ -61,8 +61,8 @@ class UserController extends Controller
         $usuarios = User::whereRolId(4)->get();
         $tipo = "Pacientes";
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('usuarios', compact('usuarios', 'tipo','servicios', 'pacientes', 'medicos'));
     }
 

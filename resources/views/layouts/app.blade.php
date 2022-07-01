@@ -51,7 +51,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="/" class="brand-logo">
                 <img class="logo-abbr" src="{{ asset('assets/images/logo.png') }}" alt="">
                 <img class="logo-compact" src="{{ asset('assets/images/logo-text.png') }}" alt="">
                 <img class="brand-title" src="{{ asset('assets/images/logo-text.png') }}" alt="">
@@ -197,7 +197,7 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <p> <b>Servicio: </b> </p>
-                                            <select name="idServicio" id="idServicio" required onchange="getMedicos()"
+                                            <select name="idServicio" id="idServicioAdd" required onchange="getMedicos()"
                                                 class="form-control show-tick">
                                                 <option value="">-- SELECCIONE --</option>
                                                 @foreach ($servicios as $servicio)
@@ -212,7 +212,7 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <p> <b>Médico: </b> </p>
-                                            <select name="idMedico" id="idMedico" disabled required
+                                            <select name="idMedico" id="idMedicoAdd" disabled required
                                                 class="form-control show-tick">
                                                 <option value="">-- SELECCIONE --</option>
                                                 @foreach ($medicos as $medico)
@@ -228,7 +228,7 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-125 col-md-125 col-sm-12">
                                             <p> <b>Paciente: </b> </p>
-                                            <select name="idPaciente" id="idPaciente" disabled required
+                                            <select name="idPaciente" id="idPacienteAdd" disabled required
                                                 class="form-control show-tick">
                                                 <option value="">-- SELECCIONE --</option>
                                                 @foreach ($pacientes as $medico)
@@ -249,7 +249,7 @@
 
                                         <div class="col-md-6">
                                             <p> <b>Horario: </b> </p>
-                                            <select name="idHorario" id="idHorario" required
+                                            <select name="idHorario" id="idHorarioAdd" required
                                                 class="form-control show-tick">
                                                 <option value="">-- SELECCIONE --</option>
                                             </select>
@@ -320,6 +320,26 @@
             } else {
                 $("#archivoRefrencia").attr('disabled', true)
             }
+        }
+
+        $("#idMedicoAdd").select2();
+        $("#idPacienteAdd").select2();
+        $("#idServicioAdd").select2();
+
+        function buscarHorarios() {
+            axios.get('/api/getHorariosOcupados/' + $("#idMedicoAdd").val() + '/' + $("#fecha").val()).then((response) => {
+                $("#idHorarioAdd").html(response.data)
+                console.log(response.data)
+            })
+        }
+
+        function getMedicos()
+        {
+            axios.get('/api/getMedicosByServcicio/'+$("#idServicioAdd").val()).then((response) => {
+                $("#idMedicoAdd").html(response.data)
+                $("#idMedicoAdd").attr('disabled', false)
+                $("#idPacienteAdd").attr('disabled', false)
+            })
         }
     </script>
 

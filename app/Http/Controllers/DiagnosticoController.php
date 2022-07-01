@@ -11,8 +11,8 @@ class DiagnosticoController extends Controller
     {
         $diagnosticos = Diagnostico::where('estado', 1)->with(['cita', 'cita.medico', 'cita.paciente', 'cita.servicio', 'triaje'])->get();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('diagnosticos.list', compact('diagnosticos','servicios', 'pacientes', 'medicos'));
     }
 

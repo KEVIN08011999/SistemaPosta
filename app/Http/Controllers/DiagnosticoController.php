@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{Citas, Diagnostico, User, Servicios};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiagnosticoController extends Controller
 {
@@ -50,6 +51,20 @@ class DiagnosticoController extends Controller
                         ->with(['medico', 'servicio', 'diagnostico', 'diagnostico.triaje', 'paciente'])
                         ->orderBy('id', 'desc')
                         ->get();
+
+        return view('historias.list', compact('paciente', 'citas', 'servicios', 'medicos', 'pacientes'));
+    }
+
+    public function Mihistoriaclinica()
+    {
+        $servicios = Servicios::all();
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
+        $paciente = User::find(Auth::user()->id);
+        $citas = Citas::where('idPaciente', Auth::user()->id)
+            ->with(['medico', 'servicio', 'diagnostico', 'diagnostico.triaje', 'paciente'])
+            ->orderBy('id', 'desc')
+            ->get();
 
         return view('historias.list', compact('paciente', 'citas', 'servicios', 'medicos', 'pacientes'));
     }

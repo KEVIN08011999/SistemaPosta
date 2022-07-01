@@ -88,17 +88,16 @@
                      </a>
                  </li>
 
-                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                         <i class="flaticon-381-bookmark-1"></i>
-
-                         <span class="nav-text">Farmacia</span>
+                <li><a href="{{ route('mis-citas') }}" class="ai-icon" aria-expanded="false">
+                         <i class="flaticon-381-home"></i>
+                         <span class="nav-text">Mis citas</span>
                      </a>
-                     <ul aria-expanded="false">
-                         <li><a href="{{ route('farmacia.index') }}">Buscar Receta</a></li>
-                         <li><a href="{{ route('farmacia.venta') }}">Vender</a></li>
-                         <li><a href="{{ route('farmacia.ventas') }}">Ventas</a></li>
-                         <li><a href="{{ route('farmacia.medicamentos') }}">Medicamentos</a></li>
-                     </ul>
+                 </li>
+
+                 <li><a href="{{ route('mi-historial') }}" class="ai-icon" aria-expanded="false">
+                         <i class="flaticon-381-home"></i>
+                         <span class="nav-text">Mi Historial Medico</span>
+                     </a>
                  </li>
 
 

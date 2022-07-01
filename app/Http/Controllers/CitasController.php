@@ -4,12 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{BloquesHorarios, Citas, PagosPaciente, Servicios, User};
+use Illuminate\Support\Facades\Auth;
 
 class CitasController extends Controller
 {
     public function index()
     {
         $citas = Citas::where('sis', 0)->with(['medico', 'paciente', 'horario', 'servicio'])->get();
+
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->where('id', Auth::user()->id)->get();
+        $horarios = BloquesHorarios::all();
+        $servicios = Servicios::all();
+        return view('citas', compact('citas', 'medicos', 'pacientes', 'horarios', 'servicios'));
+    }
+
+    public function misCitas()
+    {
+        $citas = Citas::where('idPaciente', Auth::user()->id)->with(['medico', 'paciente', 'horario', 'servicio'])->get();
 
         $medicos = User::whereRolId(2)->get();
         $pacientes = User::whereRolId(4)->get();

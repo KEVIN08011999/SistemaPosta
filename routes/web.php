@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Citas;
 use App\Models\Diagnostico;
 use App\Models\Empresa;
 use App\Models\User;
@@ -89,4 +90,10 @@ Route::group(['prefix' => 'farmacia'], function () {
 Route::group(['prefix' => 'pdfs'], function () {
     Route::get('/receta/{cita}', [PDFController::class, 'receta'])->name('pdf.receta');
     Route::get('/diagnostico/{cita}', [PDFController::class, 'diagnostico'])->name('pdf.diagnostico');
+});
+
+
+Route::group(['prefix' => 'paciente'], function () {
+    Route::get('mis-citas', [CitasController::class, 'misCitas'])->name('mis-citas');
+    Route::get('mi-historial', [DiagnosticoController::class, 'Mihistoriaclinica'])->name('mi-historial');
 });

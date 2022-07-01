@@ -97,3 +97,8 @@ Route::group(['prefix' => 'paciente'], function () {
     Route::get('mis-citas', [CitasController::class, 'misCitas'])->name('mis-citas');
     Route::get('mi-historial', [DiagnosticoController::class, 'Mihistoriaclinica'])->name('mi-historial');
 });
+
+Route::group(['prefix' => 'medico'], function () {
+    Route::get('mis-citas-m', [CitasController::class, 'misCitasM'])->name('mis-citas-medico');
+    Route::get('mis-diagnosticos', [DiagnosticoController::class, 'indexMedico'])->name('mis-diagnostico');
+});

@@ -78,6 +78,37 @@
              </ul>
          @elseif(Auth::user()->rol_id == 2)
 
+         <ul class="metismenu" id="menu">
+                 <li><a href="{{ route('index') }}" class="ai-icon" aria-expanded="false">
+                         <i class="flaticon-381-home"></i>
+                         <span class="nav-text">Inicio</span>
+                     </a>
+                 </li>
+
+                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                         <i class="flaticon-381-user"></i>
+
+                         <span class="nav-text">Usuarios</span>
+                     </a>
+                     <ul aria-expanded="false">
+                         <li><a href="{{ route('pacientes') }}">Pacientes</a></li>
+                     </ul>
+                 </li>
+
+                <li><a href="{{ route('mis-citas-medico') }}" class="ai-icon" aria-expanded="false">
+                         <i class="flaticon-381-home"></i>
+                         <span class="nav-text">Mis citas</span>
+                     </a>
+                 </li>
+
+                 <li><a href="{{ route('mis-diagnostico') }}" class="ai-icon" aria-expanded="false">
+                         <i class="flaticon-381-home"></i>
+                         <span class="nav-text">Diagnosticos</span>
+                     </a>
+                 </li>
+
+             </ul>
+
          @elseif(Auth::user()->rol_id == 3)
 
          @elseif(Auth::user()->rol_id == 4)

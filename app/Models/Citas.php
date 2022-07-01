@@ -46,4 +46,9 @@ class Citas extends Model
     {
         return $this->hasOne(Diagnostico::class, 'idCita', 'id');
     }
+
+    public function triaje()
+    {
+        return $this->hasOne(Triaje::class, 'id', 'idCita');
+    }
 }

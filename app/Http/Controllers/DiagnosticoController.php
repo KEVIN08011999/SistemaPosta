@@ -17,6 +17,15 @@ class DiagnosticoController extends Controller
         return view('diagnosticos.list', compact('diagnosticos','servicios', 'pacientes', 'medicos'));
     }
 
+    public function indexMedico()
+    {
+        $diagnosticos = Citas::where('idMedico', Auth::user()->id)->where('fecha', date('Y-m-d'))->with('diagnostico', 'diagnostico.cita','diagnostico.cita.medico','diagnostico.cita.paciente', 'diagnostico.cita.servicio', 'triaje')->get();
+        $servicios = Servicios::all();
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
+        return view('diagnosticos.misdiagnosticos', compact('diagnosticos', 'servicios', 'pacientes', 'medicos'));
+    }
+
 
     public function store(Request $request)
     {

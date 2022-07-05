@@ -11,8 +11,8 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::first();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('config.empresa', compact('empresa', 'servicios', 'pacientes', 'medicos'));
     }
 

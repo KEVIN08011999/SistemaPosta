@@ -166,7 +166,7 @@
                                             <select name="tipoCita" onchange="archivosis()" required id="tipoCita"
                                                 class="form-control show-tick">
                                                 <option value="">-- SELECCIONE --</option>
-                                                <option value="0">-- NORMAL --</option>
+                                                <option value="0">-- PAGANTE --</option>
                                                 <option value="1">-- SIS --</option>
                                             </select>
 

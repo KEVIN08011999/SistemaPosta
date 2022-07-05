@@ -11,8 +11,8 @@ class PagosPacienteController extends Controller
     {
         $pagos = PagosPaciente::whereFechaGeneracion(date('Y-m-d'))->whereEstado(1)->with(['paciente', 'servicio'])->get();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('pagos.list', compact('pagos','servicios', 'pacientes', 'medicos'));
     }
 
@@ -20,8 +20,8 @@ class PagosPacienteController extends Controller
     {
         $pagos = PagosPaciente::whereEstado(2)->with(['paciente', 'servicio'])->get();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('pagos.list', compact('pagos','servicios', 'pacientes', 'medicos'));
     }
 

@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label for="">Tipo de Paciente</label>
                             <select name="tipoPaciente" class="form-control" id="tipoPaciente">
-                                <option value="1">-- NORMAL --</option>
+                                <option value="1">-- PAGANTE --</option>
                                 <option value="2">-- SIS --</option>
                             </select>
                         </div>

@@ -143,8 +143,8 @@ class UserController extends Controller
     {
         $usuarios = User::whereRolId(4)->with(['citas_data', 'citas_data.diagnostico', 'citas_data.diagnostico.recetas'])->get();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('farmacias.list', compact('usuarios','servicios', 'pacientes', 'medicos'));
     }
 

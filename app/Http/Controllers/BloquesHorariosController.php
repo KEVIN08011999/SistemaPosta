@@ -11,8 +11,8 @@ class BloquesHorariosController extends Controller
     {
         $horarios = BloquesHorarios::all();
         $servicios = Servicios::all();
-        $medicos = User::whereIdRol(2);
-        $pacientes = User::whereIdRol(4);
+        $medicos = User::whereRolId(2)->get();
+        $pacientes = User::whereRolId(4)->get();
         return view('config.horarios', compact('horarios','servicios', 'pacientes', 'medicos'));
     }
 

@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{$i = 0;}}
+                            {{$i = 0}}
                             @foreach ($venta->detalle as $detalle)
                             {{$i++}}
                                 <tr>
